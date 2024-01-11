@@ -1,9 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export interface INavbarData {
   routeLink: string;
-  icon?: IconProp;
+  icon?: string;
   label: string;
   expanded?: boolean;
   items?: INavbarData[];

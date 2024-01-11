@@ -41,7 +41,7 @@
           [routerLinkActiveOptions]="{ exact: true }"
           (click)="shrinkItems(data)"
         >
-          <fa-icon class="sidenav-link-icon" [icon]="data.icon"></fa-icon>
+          <i class="sidenav-link-icon" [ngClass]="data.icon"></i>
           <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
             {{ data.label }}
           </span>
