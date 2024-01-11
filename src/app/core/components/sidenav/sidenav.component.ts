@@ -84,6 +84,9 @@ export class SidenavComponent implements OnInit {
   handleClick(item: INavbarData): void {
     this.shrinkItems(item);
     item.expanded = !item.expanded;
+    if (item.items && item.items.length > 0 && !this.collapsed) {
+      this.collapsed = true;
+    }
   }
 
   getActiveClass(data: INavbarData): string {

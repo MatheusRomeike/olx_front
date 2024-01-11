@@ -40,17 +40,19 @@ import { INavbarData, fadeInOut } from './helper';
           *ngIf="item.items && item.items.length > 0"
           [ngClass]="getActiveClass(item)"
         >
-          <i class="sublevel-link-icon fa fa-circle"></i>
+          <app-icon class="sublevel-link-icon">circle</app-icon>
           <span class="sublevel-link-text" @fadeInOut *ngIf="collapsed">{{
             item.label
           }}</span>
-          <i
+          <app-icon
             *ngIf="item.items && collapsed"
             class="menu-collapse-icon"
             [ngClass]="
               !item.expanded ? 'fal fa-angle-right' : 'fal fa-angle-down'
             "
-          ></i>
+          >
+            {{ !item.expanded ? 'chevron_right' : 'expand_more' }}
+          </app-icon>
         </a>
         <a
           class="sublevel-nav-link"
@@ -59,7 +61,7 @@ import { INavbarData, fadeInOut } from './helper';
           routerLinkActive="active-sublevel"
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          <i class="sublevel-link-icon fa fa-circle"></i>
+          <app-icon class="sublevel-link-icon">circle</app-icon>
           <span class="sublevel-link-text" @fadeInOut *ngIf="collapsed">{{
             item.label
           }}</span>
