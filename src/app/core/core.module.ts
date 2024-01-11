@@ -8,7 +8,8 @@ import { RouterModule } from '@angular/router';
 // import { ResponsiveModule } from 'ngx-responsive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { SublevelMenuComponent } from './components/sidenav/sublevel.menu.component';
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component';
 
 @NgModule({
@@ -22,7 +23,11 @@ import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [SidebarComponent, DefaultLayoutComponent],
+  declarations: [
+    SidenavComponent,
+    DefaultLayoutComponent,
+    SublevelMenuComponent,
+  ],
   exports: [
     BrowserModule,
     BrowserAnimationsModule,

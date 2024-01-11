@@ -7,6 +7,12 @@ import { IconComponent } from './component/icon/icon.component';
 @NgModule({
   declarations: [IconComponent],
   exports: [IconComponent],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterModule,
+    FontAwe,
+  ],
 })
 export class SharedModule {}
