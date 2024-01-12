@@ -14,6 +14,13 @@ const routes: Routes = [
             (m) => m.DashboardModule
           ),
       },
+      {
+        path: 'accounts',
+        loadChildren: () =>
+          import('./pages/accounts/accounts.module').then(
+            (m) => m.AccountsModule
+          ),
+      },
     ],
   },
 ];

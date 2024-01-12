@@ -7,6 +7,25 @@ export const navbarData: INavbarData[] = [
     label: 'Dashboard',
   },
   {
+    routeLink: 'accounts',
+    icon: 'account_tree',
+    label: 'Accounts',
+    items: [
+      {
+        routeLink: 'accounts/manage',
+        label: 'Manage',
+      },
+      {
+        routeLink: 'accounts/publish',
+        label: 'Publish',
+      },
+      {
+        routeLink: 'accounts/logs',
+        label: 'Logs',
+      },
+    ],
+  },
+  {
     routeLink: 'settings',
     icon: 'settings',
     label: 'Settings',
