@@ -1,0 +1,24 @@
+.icon-container {
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+.icon-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Fundo cinza com transparência */
+  top: 0;
+  left: 0;
+  z-index: 1; /* Garante que a camada cinza esteja na frente da imagem */
+}
+
+.checked .icon-overlay {
+  display: none; /* Oculta a camada cinza quando estiver marcado */
+}

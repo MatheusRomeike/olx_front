@@ -1,0 +1,8 @@
+<div
+  class="icon-container rounded"
+  [ngClass]="{ checked: isChecked }"
+  (click)="toggleCheckbox()"
+>
+  <img [src]="imagePath" alt="Ícone" class="rounded" />
+  <div class="icon-overlay rounded"></div>
+</div>

@@ -1,1 +1,32 @@
 <h1>Publish</h1>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-5">
+  <div>
+    <label class="form-label">Mensagem da publicação</label>
+    <textarea
+      type="text"
+      class="form-control"
+      formControlName="texto"
+      rows="6"
+      placeholder="Escreva a mensagem da publicação"
+    ></textarea>
+  </div>
+  <label class="form-label mt-2">Plataformas</label>
+  <div class="col-12 d-flex gap-2">
+    <app-image-checkbox
+      formControlName="x"
+      imagePath="assets/brands/x.png"
+    ></app-image-checkbox>
+    <app-image-checkbox
+      formControlName="instagram"
+      imagePath="assets/brands/instagram.png"
+    ></app-image-checkbox>
+  </div>
+  <button
+    type="submit"
+    class="btn btn-primary float-end mt-2"
+    [disabled]="form.invalid"
+  >
+    Criar publicação
+  </button>
+</form>
