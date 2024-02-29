@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
-  Validators,
   ValidatorFn,
-  AbstractControl,
+  Validators,
 } from '@angular/forms';
-import { PublishService } from '../publish.service';
+import { Confirmable } from 'src/app/shared/decorators/confirmable.decorator';
 
 @Component({
   selector: 'app-accounts-publish-root',
@@ -16,7 +16,7 @@ import { PublishService } from '../publish.service';
 export class AccountsPublishRootComponent {
   form: FormGroup;
 
-  constructor(private publishService: PublishService) {
+  constructor() {
     this.form = new FormGroup(
       {
         texto: new FormControl('', [Validators.required]),
@@ -27,11 +27,9 @@ export class AccountsPublishRootComponent {
     );
   }
 
+  @Confirmable()
   async onSubmit() {
     let texto = this.form.get('texto').value;
-    if (this.form.get('x').value) {
-      await this.publishService.postOnTwitter(texto);
-    }
   }
 
   atLeastOneCheckedValidator(checkedFields: string[]): ValidatorFn {
