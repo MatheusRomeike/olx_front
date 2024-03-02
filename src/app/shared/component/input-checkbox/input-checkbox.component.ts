@@ -1,7 +1,6 @@
 import {
   AfterViewInit,
   Component,
-  ContentChild,
   ElementRef,
   EventEmitter,
   forwardRef,
@@ -11,7 +10,6 @@ import {
   Optional,
   Output,
   SkipSelf,
-  TemplateRef,
   ViewChild,
 } from '@angular/core';
 import {
@@ -39,20 +37,12 @@ export class InputCheckboxComponent
   implements OnInit, AfterViewInit, ControlValueAccessor
 {
   @ViewChild('input') input: ElementRef | undefined;
-  @ContentChild('dropdownMenuItems')
-  dropdownMenuItems: TemplateRef<any> | undefined;
-
   @Input() columnSize: number | string = 3;
-  @Input() columnSizeMd: number | null | string = null;
-  @Input() columnSizeLg: number | null | string = null;
-
   @Input() className = '';
   @Input() label = '';
   @Input() id: string = uuidv4();
   @Input() formControlName = '';
-
   @Output() onKeyDown = new EventEmitter();
-
   onChange: any = () => {};
   onTouched: any = () => {};
 
@@ -91,7 +81,7 @@ export class InputCheckboxComponent
   }
 
   ngAfterViewInit(): void {
-    applyColumn(this.id, this.columnSize, this.columnSizeMd, this.columnSizeLg);
+    applyColumn(this.id, this.columnSize);
   }
 
   updateValue(rawValue: any) {

@@ -1,16 +1,13 @@
-<div class="form-check form-group">
-  <label
-    *ngIf="label"
-    style="margin-bottom: 0 !important"
-    [for]="id"
-    class="form-label pt-1"
-    >{{ label }}{{ required ? " *" : "" }}</label
-  >
-  <input
-    #input
-    type="checkbox"
-    [disabled]="disabled"
-    class="form-check-input {{ className }}"
-    [id]="id"
-  />
+<div class="form-group">
+  <label class="form-check-label d-flex align-items-center">
+    <input
+      #input
+      type="checkbox"
+      [disabled]="disabled"
+      class="form-check-input {{ className }}"
+      [id]="id"
+      [(ngModel)]="value"
+    />
+    {{ label }}{{ required ? " *" : "" }}
+  </label>
 </div>
