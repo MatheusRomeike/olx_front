@@ -14,30 +14,29 @@ import { Confirmable } from 'src/app/shared/decorators/confirmable.decorator';
   styleUrls: ['./accounts-publish-root.component.scss'],
 })
 export class AccountsPublishRootComponent {
-  form: FormGroup;
+  form;
 
-  constructor() {
-    this.form = new FormGroup(
-      {
-        texto: new FormControl('', [Validators.required]),
-        x: new FormControl(false),
-        instagram: new FormControl(false),
-      },
-      { validators: this.atLeastOneCheckedValidator(['x', 'instagram']) }
-    );
-  }
+  generos = [
+    {
+      value: 'M',
+      label: 'Masculino',
+    },
+    {
+      value: 'F',
+      label: 'Feminino',
+    },
+  ];
 
-  @Confirmable()
-  async onSubmit() {
-    let texto = this.form.get('texto').value;
-  }
-
-  atLeastOneCheckedValidator(checkedFields: string[]): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: boolean } | null => {
-      const isChecked = checkedFields.some(
-        (field) => control.get(field)?.value
-      );
-      return isChecked ? null : { atLeastOneChecked: true };
-    };
+  ngOnInit() {
+    this.form = new FormGroup({
+      nome: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(60),
+      ]),
+      genero: new FormControl('', [Validators.required]),
+      dataNascimento: new FormControl('', [Validators.required]),
+      vigente: new FormControl(false),
+    });
   }
 }

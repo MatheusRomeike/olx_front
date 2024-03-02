@@ -1,0 +1,32 @@
+<div class="form-group" [id]="id">
+  <label *ngIf="label" [for]="id" class="form-label mb-0 pt-1"
+    >{{ label }}{{ required ? " *" : "" }}</label
+  >
+
+  <select
+    class="form-control"
+    (click)="updateTouched()"
+    (blur)="updateTouched()"
+    (change)="updateValue($event)"
+    [(ngModel)]="value"
+    [class.is-invalid]="!formControl?.valid && formControl?.touched"
+    [class.is-valid]="formControl?.valid && formControl?.touched"
+  >
+    <option value="">{{ placeholder ? placeholder : "Selecione" }}</option>
+    <option [value]="item[bindValue]" *ngFor="let item of items">
+      {{ item[bindLabel] }}
+    </option>
+  </select>
+
+  <div
+    class="input-invalid-feedback text-danger"
+    *ngIf="
+      !formControl?.valid &&
+      formControl?.touched &&
+      $any(formControl).errors &&
+      $any(formControl).errors['required']
+    "
+  >
+    Este campo é obrigatório
+  </div>
+</div>

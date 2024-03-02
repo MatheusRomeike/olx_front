@@ -1,0 +1,55 @@
+<div class="form-group mb-0">
+  <label *ngIf="label" [for]="id" class="form-label mb-0 pt-1"
+    >{{ label }}{{ required ? " *" : "" }}</label
+  >
+
+  <div class="input-group">
+    <input
+      [name]="name"
+      [ngModel]="valueDisplay"
+      [navigation]="'arrows'"
+      (dateSelect)="valueChange($event)"
+      [showWeekNumbers]="false"
+      [firstDayOfWeek]="0"
+      ngbDatepicker
+      #date="ngbDatepicker"
+      class="form-control"
+      container="body"
+      autocomplete="off"
+      (keyup)="applyMaskAndUpdateValue($event)"
+      [disabled]="formControl?.disabled"
+      [ngModelOptions]="{ standalone: true }"
+      [id]="id"
+      [class.is-invalid]="!formControl?.valid && formControl?.touched"
+      [class.is-valid]="formControl?.valid && formControl?.touched"
+      (click)="updateTouched()"
+      (blur)="blur($event)"
+      [placeholder]="placeholder"
+      maxlength="10"
+    />
+
+    <div class="input-group-append">
+      <button
+        class="btn btn-sm btn-info btn-icon-calendar"
+        (click)="date.toggle()"
+        type="button"
+      >
+        <app-icon class="material-icons-outlined" style="color: White"
+          >calendar_month</app-icon
+        >
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="input-invalid-feedback text-danger"
+    *ngIf="
+      !formControl?.valid &&
+      formControl?.touched &&
+      $any(formControl).errors &&
+      $any(formControl).errors['required']
+    "
+  >
+    Este campo é obrigatório
+  </div>
+</div>
