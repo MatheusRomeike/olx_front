@@ -1,19 +1,7 @@
 <div class="form-group">
-  <label
-    *ngIf="label"
-    style="margin-bottom: 0 !important"
-    [for]="id"
-    class="form-label pt-1"
-    >&nbsp;</label
-  >
+  <label *ngIf="label" class="form-label">&nbsp;</label>
   <div class="form-check">
-    <label
-      *ngIf="label"
-      style="margin-bottom: 0 !important"
-      [for]="id"
-      class="form-label pt-1"
-      >{{ label }}</label
-    >
+    <label *ngIf="label" [for]="id" class="form-label">{{ label }}</label>
     <input
       #input
       type="checkbox"

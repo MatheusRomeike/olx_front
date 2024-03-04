@@ -1,12 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
-import { Confirmable } from 'src/app/shared/decorators/confirmable.decorator';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-accounts-publish-root',
@@ -36,7 +29,7 @@ export class AccountsPublishRootComponent {
       ]),
       genero: new FormControl('', [Validators.required]),
       dataNascimento: new FormControl('', [Validators.required]),
-      vigente: new FormControl(false),
+      vigente: new FormControl(true),
     });
   }
 }

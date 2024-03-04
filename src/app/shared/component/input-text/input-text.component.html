@@ -1,6 +1,106 @@
-<div class="form-check form-group">
-  <input class="form-check-input" type="checkbox" id="reducaoBaseIcmsFabrica" />
-  <label class="form-check-label" for="reducaoBaseIcmsFabrica">
-    Utiliza Redução Base ICMS Fábrica(%)</label
-  >
-</div>
+<ng-template #inputGroupText>
+  <div *ngIf="dropdownMenuItems">
+    <div ngbDropdown class="d-block w-100 dropdown-arrow-none">
+      <span class="text-primary pointer" ngbDropdownToggle>
+        <app-icon>{{ icon }}</app-icon>
+      </span>
+
+      <div ngbDropdownMenu class="border-light rounded-3">
+        <ng-container [ngTemplateOutlet]="dropdownMenuItems"></ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!dropdownMenuItems">
+    <app-icon>{{ icon }}</app-icon>
+  </div>
+</ng-template>
+
+<label
+  *ngIf="label"
+  style="margin-bottom: 0 !important"
+  [for]="id"
+  class="form-label pt-1"
+  >{{ label }}{{ required ? " *" : "" }}</label
+>
+
+<ng-container *ngIf="!textArea">
+  <div class="form-group" style="margin-bottom: 0 !important">
+    <div class="input-group">
+      <div *ngIf="icon && iconPosition == 'left'" class="input-group-prepend">
+        <span class="input-group-text border-end-0">
+          <ng-container [ngTemplateOutlet]="inputGroupText"></ng-container>
+        </span>
+      </div>
+      <input
+        #input
+        [type]="type"
+        [maxlength]="maxlenght"
+        [disabled]="disabled"
+        [readOnly]="disabled"
+        [(ngModel)]="value"
+        (ngModelChange)="updateValue($any($event))"
+        class="form-control {{ className }}"
+        [class.border-start-0]="icon && iconPosition == 'left'"
+        [class.border-end-0]="icon && iconPosition == 'right'"
+        [class.is-invalid]="
+          !isValid &&
+          formControl?.touched &&
+          !formControl?.disabled &&
+          showStatusIndicator
+        "
+        [class.is-valid]="
+          isValid &&
+          formControl?.touched &&
+          !formControl?.disabled &&
+          showStatusIndicator
+        "
+        [id]="id"
+        [placeholder]="placeholder"
+        [readOnly]="readOnly"
+        [min]="min"
+        [max]="max"
+        (click)="formControl?.markAsTouched()"
+        (blur)="formControl?.markAsTouched()"
+        [style.fontSize]="fontSize"
+      />
+      <div *ngIf="icon && iconPosition == 'right'" class="input-group-append">
+        <span class="input-group-text border-start-0">
+          <ng-container [ngTemplateOutlet]="inputGroupText"></ng-container>
+        </span>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="textArea">
+  <textarea
+    [rows]="rows"
+    (keyup)="updateValue($any($event.target).value)"
+    [readOnly]="readOnly"
+    [value]="value"
+    class="form-control {{ className }}"
+    [class.is-invalid]="
+      !isValid &&
+      formControl?.touched &&
+      !formControl?.disabled &&
+      showStatusIndicator
+    "
+    [class.is-valid]="
+      isValid &&
+      formControl?.touched &&
+      !formControl?.disabled &&
+      showStatusIndicator
+    "
+    [id]="id"
+    [placeholder]="placeholder"
+    (click)="formControl?.markAsTouched()"
+    [disabled]="disabled"
+  ></textarea>
+</ng-container>
+
+<ng-container *ngIf="enabledFeedback">
+  <div class="input-invalid-feedback text-danger" *ngIf="invalidFeedback">
+    {{ invalidFeedback }}
+  </div>
+</ng-container>
