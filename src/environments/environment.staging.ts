@@ -1,5 +1,5 @@
 export const environment = {
   name: 'staging',
   production: false,
-  hubAutoApiUrl: 'https://api-staging.whatsauto.com.br',
+  apiUrl: 'http://54.221.103.91',
 };
