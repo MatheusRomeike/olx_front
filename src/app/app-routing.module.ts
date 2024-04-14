@@ -8,6 +8,11 @@ const routes: Routes = [
     component: DefaultLayoutComponent,
     children: [
       {
+        path: 'login',
+        loadChildren: () =>
+          import('./pages/login/login.module').then((m) => m.LoginModule),
+      },
+      {
         path: 'dashboard',
         loadChildren: () =>
           import('./pages/home/dashboard.module').then(
