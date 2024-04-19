@@ -12,31 +12,31 @@ export class HttpBaseService {
 
   getAll(url: string) {
     return firstValueFrom(
-      this.httpClient.get(`${environment.hubAutoApiUrl}/${url}`)
+      this.httpClient.get(`${environment.apiUrl}/${url}`)
     ) as any;
   }
 
   getById(url: string, id: number) {
     return firstValueFrom(
-      this.httpClient.get(`${environment.hubAutoApiUrl}/${url}/${id}`)
+      this.httpClient.get(`${environment.apiUrl}/${url}/${id}`)
     );
   }
 
   post(url: string, body: any) {
     return firstValueFrom(
-      this.httpClient.post(`${environment.hubAutoApiUrl}/${url}`, body)
+      this.httpClient.post(`${environment.apiUrl}/${url}`, body)
     );
   }
 
   put(url: string, body: any) {
     return firstValueFrom(
-      this.httpClient.put(`${environment.hubAutoApiUrl}/${url}`, body)
+      this.httpClient.put(`${environment.apiUrl}/${url}`, body)
     );
   }
 
   delete(url: string, id: number) {
     return firstValueFrom(
-      this.httpClient.delete(`${environment.hubAutoApiUrl}/${url}/${id}`)
+      this.httpClient.delete(`${environment.apiUrl}/${url}/${id}`)
     );
   }
 }

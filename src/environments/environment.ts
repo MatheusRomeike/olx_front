@@ -1,5 +1,5 @@
 export const environment = {
   name: 'development',
   production: false,
-  hubAutoApiUrl: 'http://localhost:5001',
+  apiUrl: 'http://localhost:5000',
 };
