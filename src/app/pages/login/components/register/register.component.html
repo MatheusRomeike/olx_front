@@ -1,9 +1,25 @@
 <div class="container mt-5 shadow p-3 mb-5 bg-white rounded">
-  <h2 class="text-center">Formulário de Registro</h2>
-  <form [formGroup]="form" class=" d-flex flex-column align-items-center">
-    <div input-text [formControlName]="'nome'" [label]="'Nome'" [id]="'nome'" [placeholder]="'Informe o nome...'"></div>
-    <div input-text [formControlName]="'email'" [label]="'Email'" [id]="'email'" [placeholder]="'Informe o Email...'"></div>
-    <div input-date-picker [formControlName]="'dataNascimento'" [label]="'Data de Nascimento'" [id]="'dataNascimento'">
-    </div>
+  <h2 (click)="teste()" class="text-center">Formulário de Registro</h2>
+  <form [formGroup]="form" class="d-flex flex-column align-items-center">
+    <div
+      input-text
+      [formControlName]="'nome'"
+      [label]="'Nome'"
+      [id]="'nome'"
+      [placeholder]="'Informe o nome...'"
+    ></div>
+    <div
+      input-text
+      [formControlName]="'email'"
+      [label]="'Email'"
+      [id]="'email'"
+      [placeholder]="'Informe o Email...'"
+    ></div>
+    <div
+      input-date-picker
+      [formControlName]="'dataNascimento'"
+      [label]="'Data de Nascimento'"
+      [id]="'dataNascimento'"
+    ></div>
   </form>
 </div>

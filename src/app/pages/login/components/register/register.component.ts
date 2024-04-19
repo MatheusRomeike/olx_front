@@ -1,3 +1,4 @@
+import { LoadingService } from './../../../../shared/services/loading.service';
 import { Component } from '@angular/core';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -5,9 +6,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
+  constructor(private loadingService: LoadingService) {}
   form;
 
   ngOnInit() {
@@ -20,5 +22,9 @@ export class RegisterComponent {
       email: new FormControl('', [Validators.required, Validators.email]),
       dataNascimento: new FormControl('', [Validators.required]),
     });
+  }
+
+  teste() {
+    this.loadingService.show();
   }
 }

@@ -9,6 +9,7 @@ import { InputSelectOptionComponent } from './component/input-select-option/inpu
 import { InputDatePickerComponent } from './component/input-date-picker/input-date-picker.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InputCheckboxComponent } from './component/input-checkbox/input-checkbox.component';
+import { LoadingComponent } from './component/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { InputCheckboxComponent } from './component/input-checkbox/input-checkbo
     InputSelectOptionComponent,
     InputDatePickerComponent,
     InputCheckboxComponent,
+    LoadingComponent,
   ],
   exports: [
     IconComponent,
@@ -27,6 +29,7 @@ import { InputCheckboxComponent } from './component/input-checkbox/input-checkbo
     InputDatePickerComponent,
     InputCheckboxComponent,
     NgbModule,
+    LoadingComponent,
   ],
   imports: [
     CommonModule,
