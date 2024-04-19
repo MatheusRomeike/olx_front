@@ -10,7 +10,9 @@ export class LoginService {
   constructor(private http: HttpBaseService) { }
 
   public async cadastrar(data) {
-    const response = await this.http.post('usuario/cadastrar', data);
+    console.log(data);
+    
+    const response = await this.http.post('usuario/Add', data);
     console.log(response);
     return response;
     
