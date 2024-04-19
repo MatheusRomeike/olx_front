@@ -12,6 +12,7 @@ import { InputSelectOptionComponent } from './component/input-select-option/inpu
 import { InputTextComponent } from './component/input-text/input-text.component';
 import { LoadingComponent } from './component/loading/loading.component';
 import { LoadingService } from './services/loading.service';
+import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { LoadingService } from './services/loading.service';
     InputDatePickerComponent,
     InputCheckboxComponent,
     LoadingComponent,
+    ConfirmationDialogComponent,
   ],
   exports: [
     IconComponent,
@@ -33,6 +35,7 @@ import { LoadingService } from './services/loading.service';
     NgbModule,
     LoadingComponent,
     ToastNoAnimationModule,
+    ConfirmationDialogComponent,
   ],
   imports: [
     CommonModule,
