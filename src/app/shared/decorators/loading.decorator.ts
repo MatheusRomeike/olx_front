@@ -34,7 +34,7 @@ export function Loading(
         let conteudo = `${
           mensagens?.Erro?.Conteudo ?? 'Ocorreu um erro inesperado'
         }`;
-        if (mostrarErroApi) conteudo += ` ${error.error.message}`;
+        if (mostrarErroApi) conteudo += ` ${error?.error}`;
 
         toastrService.error(conteudo, titulo);
       } finally {
