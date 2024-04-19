@@ -4,8 +4,6 @@ import {
   AbstractControl,
   FormControl,
   FormGroup,
-  ValidationErrors,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
@@ -16,7 +14,7 @@ import { LoginService } from '../../services/login.service';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent implements OnInit {
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService) { }
 
   form;
 
@@ -40,8 +38,15 @@ export class RegisterComponent implements OnInit {
       ]),
       email: new FormControl('', [Validators.required, Validators.email]),
       dataNascimento: new FormControl('', [Validators.required]),
+      senha: new FormControl('', [Validators.required]),
+      confirmaSenha: new FormControl('', [Validators.required, this.senhaConfirmarSenhaValidator]),
     });
   }
 
-  cadastrar() {}
+  async cadastrar() {
+    console.log(this.form.value);
+    const response = await this.loginService.cadastrar(this.form.value);
+    console.log(response);
+
+  }
 }
