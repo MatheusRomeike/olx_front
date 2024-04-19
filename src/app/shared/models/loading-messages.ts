@@ -1,11 +1,17 @@
-export class LoadingMessages {
-  Sucesso?: string;
-  Erro?: string;
+import { ToastrMessages } from './toastr-messages';
 
-  constructor(data?: { Sucesso?: string; Erro?: string }) {
-    if (data) {
-      this.Sucesso = data.Sucesso;
-      this.Erro = data.Erro;
-    }
+export class LoadingMessages {
+  Inicio?: ToastrMessages;
+  Sucesso?: ToastrMessages;
+  Erro?: ToastrMessages;
+
+  constructor(data?: {
+    Inicio?: ToastrMessages;
+    Sucesso?: ToastrMessages;
+    Erro?: ToastrMessages;
+  }) {
+    this.Inicio = data.Inicio;
+    this.Sucesso = data.Sucesso;
+    this.Erro = data.Erro;
   }
 }

@@ -12,15 +12,24 @@ export function Loading(mensagens: LoadingMessages = null): MethodDecorator {
 
     descriptor.value = async function (...args: any[]) {
       try {
+        if (mensagens?.Inicio) {
+          toastrService.info(
+            mensagens.Inicio.Conteudo,
+            mensagens.Inicio.Titulo
+          );
+        }
         loadingService.show();
         await originalMethod.apply(this, args);
         if (mensagens?.Sucesso) {
-          toastrService.success(mensagens.Sucesso);
+          toastrService.success(
+            mensagens.Sucesso.Conteudo,
+            mensagens.Sucesso.Titulo
+          );
         }
       } catch (error) {
         console.error('Error in LoadingDecorator:', error);
         if (mensagens?.Erro) {
-          toastrService.error(mensagens.Erro);
+          toastrService.error(mensagens.Erro.Conteudo, mensagens.Erro.Titulo);
         }
       } finally {
         loadingService.hide();
