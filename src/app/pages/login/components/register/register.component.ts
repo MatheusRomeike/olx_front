@@ -1,17 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Confirmable } from 'src/app/shared/decorators/confirmable.decorator';
-import { ConfirmableType } from 'src/app/shared/enums/confirmable-type.enum';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
-export class RegisterComponent {
-  constructor() {}
+export class RegisterComponent implements OnInit {
+  constructor(private loginService: LoginService) {}
+
   form;
+
+  senhaConfirmarSenhaValidator(
+    control: AbstractControl
+  ): { [key: string]: any } | null {
+    const confirmaSenha = control.value;
+    const senha = control.parent?.value?.senha;
+    if (senha && confirmaSenha)
+      return senha === confirmaSenha ? null : { senhaConfirmarSenha: true };
+
+    return null;
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -25,10 +43,5 @@ export class RegisterComponent {
     });
   }
 
-  @Confirmable(
-    'Você tem certeza que deseja salvar?',
-    () => true,
-    ConfirmableType.Confirmar
-  )
-  teste() {}
+  cadastrar() {}
 }

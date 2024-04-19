@@ -8,11 +8,6 @@ const routes: Routes = [
     component: DefaultLayoutComponent,
     children: [
       {
-        path: 'login',
-        loadChildren: () =>
-          import('./pages/login/login.module').then((m) => m.LoginModule),
-      },
-      {
         path: 'dashboard',
         loadChildren: () =>
           import('./pages/home/dashboard.module').then(
@@ -28,10 +23,15 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./pages/login/login.module').then((m) => m.LoginModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
