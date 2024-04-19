@@ -1,5 +1,5 @@
 export const environment = {
   name: 'production',
   production: true,
-  hubAutoApiUrl: 'https://api-prod.whatsauto.com.br',
+  apiUrl: 'http://54.221.103.911',
 };
