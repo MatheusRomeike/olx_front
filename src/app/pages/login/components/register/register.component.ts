@@ -70,7 +70,6 @@ export class RegisterComponent implements OnInit {
     true
   )
   async cadastrar() {
-    // console.log(this.form.value);
     const formValue = {
       nome: 'aaaaaaa',
       email: 'aaaa@aaaaaa',
@@ -79,11 +78,6 @@ export class RegisterComponent implements OnInit {
       confirmaSenha: 'gabriel123',
     };
 
-    await new Promise((resolve) => setTimeout(resolve, 100000));
-    // console.log(formValue);
-
-    // await new Promise((resolve) => setTimeout(resolve, 1000))
     const response = await this.loginService.cadastrar(formValue);
-    // console.log(response);
   }
 }
