@@ -1,9 +1,20 @@
-<div class="container mt-5 shadow p-3 mb-5 bg-white rounded">
+<div class="container col-6 mt-5 shadow p-3 mb-5 bg-white rounded">
   <h2 class="text-center">Formulário de Registro</h2>
   <form [formGroup]="form" class=" d-flex flex-column align-items-center">
-    <div input-text [formControlName]="'nome'" [label]="'Nome'" [id]="'nome'" [placeholder]="'Informe o nome...'"></div>
-    <div input-text [formControlName]="'email'" [label]="'Email'" [id]="'email'" [placeholder]="'Informe o Email...'"></div>
-    <div input-date-picker [formControlName]="'dataNascimento'" [label]="'Data de Nascimento'" [id]="'dataNascimento'">
+    <div input-text [columnSize]="8" [formControlName]="'nome'" [label]="'Nome'" [id]="'nome'"
+      [placeholder]="'Informe o nome...'"></div>
+    <div input-text [columnSize]="8" [formControlName]="'email'" [label]="'Email'" [id]="'email'"
+      [placeholder]="'Informe o Email...'"></div>
+    <div input-date-picker [columnSize]="8" [formControlName]="'dataNascimento'" [label]="'Data de Nascimento'"
+      [id]="'dataNascimento'">
     </div>
+    <div input-text [type]="'password'" [columnSize]="8" [formControlName]="'senha'" [label]="'Senha'" [id]="'senha'"
+      [placeholder]="'Digite sua senha...'"></div>
+    <div input-text [type]="'password'" [columnSize]="8" [formControlName]="'confirmaSenha'" [label]="'Confirmar senha'"
+      [id]="'confirmaSenha'" [placeholder]="'Digite sua senha novamente...'"></div>
+    <!-- <div *ngIf="form.get('confirmaSenha').errors?.senhaConfirmarSenha" class="text-danger">
+      As senhas não coincidem.
+    </div> -->
+    <button class="btn btn-sm btn-primary mt-3" (click)="cadastrar()">Cadastrar</button>
   </form>
 </div>

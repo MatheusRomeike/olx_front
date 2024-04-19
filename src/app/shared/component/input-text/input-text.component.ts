@@ -36,8 +36,7 @@ import { applyColumn } from '../../utils/form-utils';
   ],
 })
 export class InputTextComponent
-  implements OnInit, AfterViewInit, ControlValueAccessor
-{
+  implements OnInit, AfterViewInit, ControlValueAccessor {
   @ViewChild('input') input: ElementRef | undefined;
   @ContentChild('dropdownMenuItems')
   dropdownMenuItems: TemplateRef<any> | undefined;
@@ -68,8 +67,8 @@ export class InputTextComponent
 
   @Output() onKeyDown = new EventEmitter();
 
-  onChange: any = () => {};
-  onTouched: any = () => {};
+  onChange: any = () => { };
+  onTouched: any = () => { };
 
   @Input() disabled = false;
   @Input() value: any = '';
@@ -108,16 +107,18 @@ export class InputTextComponent
         { maxlength: 'Digite no máximo {requiredLength} caracteres' },
         { min: 'Digite um valor maior ou igual a {min}' },
         { max: 'Digite um valor menor ou igual a {max}' },
+        { senhaConfirmarSenha: 'As senhas não coincidem' }
       ];
 
       //const formControlValidators = this.formControl?.validator!!({} as AbstractControl)
       //if (!formControlValidators) return undefined
-
+      // console.log(this.formControl.errors);
+      
       const validationMessage = validationMessages.filter((item) => {
         return item[Object.keys(this.formControl.errors)[0]];
       })[0] as any;
 
-      console.log('validationMessage', validationMessage);
+      // console.log('validationMessage', validationMessage);
 
       let message = validationMessage[
         Object.keys(this.formControl.errors)[0]
@@ -140,7 +141,7 @@ export class InputTextComponent
 
   constructor(
     @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.controlContainer) {

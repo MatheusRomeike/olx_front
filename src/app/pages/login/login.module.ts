@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginRootComponent } from './login-root/login-root.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -18,6 +19,7 @@ import { LoginComponent } from './components/login/login.component';
     LoginComponent
   ],
   imports: [
+    CommonModule,
     SharedModule,
     LoginRoutingModule,
     ReactiveFormsModule
