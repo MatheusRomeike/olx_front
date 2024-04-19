@@ -112,13 +112,10 @@ export class InputTextComponent
 
       //const formControlValidators = this.formControl?.validator!!({} as AbstractControl)
       //if (!formControlValidators) return undefined
-      // console.log(this.formControl.errors);
-      
+
       const validationMessage = validationMessages.filter((item) => {
         return item[Object.keys(this.formControl.errors)[0]];
       })[0] as any;
-
-      // console.log('validationMessage', validationMessage);
 
       let message = validationMessage[
         Object.keys(this.formControl.errors)[0]
