@@ -9,6 +9,8 @@ import {
 import { LoginService } from '../../services/login.service';
 import { Loading } from 'src/app/shared/decorators/loading.decorator';
 import { ToastrMessages } from 'src/app/shared/models/toastr-messages';
+import { Confirmable } from 'src/app/shared/decorators/confirmable.decorator';
+import { ConfirmableType } from 'src/app/shared/enums/confirmable-type.enum';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +18,7 @@ import { ToastrMessages } from 'src/app/shared/models/toastr-messages';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent implements OnInit {
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService) {}
 
   form;
 
@@ -40,23 +42,48 @@ export class RegisterComponent implements OnInit {
       ]),
       email: new FormControl('', [Validators.required, Validators.email]),
       dataNascimento: new FormControl('', [Validators.required]),
-      senha: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
-      confirmaSenha: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15), this.senhaConfirmarSenhaValidator]),
+      senha: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(15),
+      ]),
+      confirmaSenha: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(15),
+        this.senhaConfirmarSenhaValidator,
+      ]),
     });
   }
 
-  @Loading({
-    Sucesso: new ToastrMessages({ Titulo: "Usuário cadastrado com sucesso." })
-  }, true)
+  @Confirmable(
+    'Deseja realmente cadastrar o usuário?',
+    () => true,
+    ConfirmableType.Confirmar
+  )
+  @Loading(
+    {
+      Sucesso: new ToastrMessages({
+        Titulo: 'Usuário cadastrado com sucesso.',
+      }),
+    },
+    true
+  )
   async cadastrar() {
-
     // console.log(this.form.value);
-    const formValue = { nome: 'aaaaaaa', email: 'aaaa@aaaaaa', dataNascimento: new Date('1999-06-17'), senha: 'gabriel123', confirmaSenha: 'gabriel123' }
+    const formValue = {
+      nome: 'aaaaaaa',
+      email: 'aaaa@aaaaaa',
+      dataNascimento: new Date('1999-06-17'),
+      senha: 'gabriel123',
+      confirmaSenha: 'gabriel123',
+    };
+
+    await new Promise((resolve) => setTimeout(resolve, 100000));
     // console.log(formValue);
-    
+
     // await new Promise((resolve) => setTimeout(resolve, 1000))
     const response = await this.loginService.cadastrar(formValue);
     // console.log(response);
-
   }
 }

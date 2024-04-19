@@ -8,13 +8,5 @@ import { LoadingService } from '../../services/loading.service';
   styleUrls: ['./loading.component.scss'],
 })
 export class LoadingComponent {
-  constructor(
-    public config: NgbProgressbarConfig,
-    public loadingService: LoadingService
-  ) {
-    config.max = 100;
-    config.striped = true;
-    config.animated = true;
-    config.type = 'dark';
-  }
+  constructor(public loadingService: LoadingService) {}
 }
