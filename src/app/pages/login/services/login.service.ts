@@ -14,7 +14,14 @@ export class LoginService {
     
     const response = await this.http.post('usuario/Add', data);
     console.log(response);
-    return response;
-    
+    return response;  
+  }
+
+  public async login(data) {
+    console.log(data);
+
+    const response = await this.http.post('usuario/Login', data);
+    console.log(response);
+    return response; 
   }
 }

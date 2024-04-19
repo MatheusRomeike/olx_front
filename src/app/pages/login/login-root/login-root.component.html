@@ -1,1 +1,25 @@
-<app-register></app-register>
+<div class="row h-100 p-0 m-0">
+  <div class="col-md-6 h-100 left background-image"></div>
+  <div class="h-100 col-md-6 col-12 d-flex justify-content-center align-items-center">
+    <div class="login-background shadow col-xl-7 col-lg-9 col-md-10 col-sm-8 col-10">
+      <div class="login-container">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="activeId" class="nav-tabs nav-fill">
+          <li [ngbNavItem]="'login'" [destroyOnHide]="true">
+            <button ngbNavLink>ENTRAR</button>
+            <ng-template ngbNavContent>
+              <app-login (redirectToRegisterEvent)="redirectToRegister()"></app-login>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="'register'">
+            <button ngbNavLink>REGISTRAR</button>
+            <ng-template ngbNavContent>
+              <app-register></app-register>
+            </ng-template>
+          </li>
+        </ul>
+
+        <div [ngbNavOutlet]="nav" class="mt-5"></div>
+      </div>
+    </div>
+  </div>
+</div>
