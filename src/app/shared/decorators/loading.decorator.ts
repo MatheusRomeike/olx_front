@@ -3,7 +3,10 @@ import { AppInjector } from 'src/app/app-injector';
 import { LoadingMessages } from '../models/loading-messages';
 import { LoadingService } from '../services/loading.service';
 
-export function Loading(mensagens: LoadingMessages = null): MethodDecorator {
+export function Loading(
+  mensagens: LoadingMessages = null,
+  mostrarErroApi = false
+): MethodDecorator {
   const toastrService = AppInjector.get(ToastrService) as ToastrService;
   const loadingService = AppInjector.get(LoadingService) as LoadingService;
 
@@ -27,10 +30,13 @@ export function Loading(mensagens: LoadingMessages = null): MethodDecorator {
           );
         }
       } catch (error) {
-        console.error('Error in LoadingDecorator:', error);
-        if (mensagens?.Erro) {
-          toastrService.error(mensagens.Erro.Conteudo, mensagens.Erro.Titulo);
-        }
+        let titulo = `${mensagens?.Erro?.Titulo ?? 'Erro'}`;
+        let conteudo = `${
+          mensagens?.Erro?.Conteudo ?? 'Ocorreu um erro inesperado'
+        }`;
+        if (mostrarErroApi) conteudo += ` ${error.error.message}`;
+
+        toastrService.error(conteudo, titulo);
       } finally {
         loadingService.hide();
       }
