@@ -45,6 +45,5 @@ import { ConfirmationDialogComponent } from './component/confirmation-dialog/con
     NgbModule,
     ToastNoAnimationModule.forRoot(),
   ],
-  providers: [LoadingService],
 })
 export class SharedModule {}
