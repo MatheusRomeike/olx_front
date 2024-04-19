@@ -117,8 +117,6 @@ export class InputTextComponent
         return item[Object.keys(this.formControl.errors)[0]];
       })[0] as any;
 
-      console.log('validationMessage', validationMessage);
-
       let message = validationMessage[
         Object.keys(this.formControl.errors)[0]
       ] as string;

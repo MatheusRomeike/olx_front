@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgbProgressbarConfig } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingService } from '../../services/loading.service';
 
@@ -12,10 +12,9 @@ export class LoadingComponent {
     public config: NgbProgressbarConfig,
     public loadingService: LoadingService
   ) {
-    // Configuração personalizada para o Progressbar
     config.max = 100;
     config.striped = true;
     config.animated = true;
-    config.type = 'success';
+    config.type = 'dark';
   }
 }
