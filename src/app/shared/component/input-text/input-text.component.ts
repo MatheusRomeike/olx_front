@@ -36,7 +36,8 @@ import { applyColumn } from '../../utils/form-utils';
   ],
 })
 export class InputTextComponent
-  implements OnInit, AfterViewInit, ControlValueAccessor {
+  implements OnInit, AfterViewInit, ControlValueAccessor
+{
   @ViewChild('input') input: ElementRef | undefined;
   @ContentChild('dropdownMenuItems')
   dropdownMenuItems: TemplateRef<any> | undefined;
@@ -55,6 +56,7 @@ export class InputTextComponent
   @Input() readOnly = false;
   @Input() icon = '';
   @Input() iconPosition: 'left' | 'right' = 'left';
+  @Input() iconAction: () => void = () => {};
   @Input() showStatusIndicator = true;
   @Input() min: number | undefined = undefined;
   @Input() max: number | undefined = undefined;
@@ -67,8 +69,8 @@ export class InputTextComponent
 
   @Output() onKeyDown = new EventEmitter();
 
-  onChange: any = () => { };
-  onTouched: any = () => { };
+  onChange: any = () => {};
+  onTouched: any = () => {};
 
   @Input() disabled = false;
   @Input() value: any = '';
@@ -107,7 +109,7 @@ export class InputTextComponent
         { maxlength: 'Digite no máximo {requiredLength} caracteres' },
         { min: 'Digite um valor maior ou igual a {min}' },
         { max: 'Digite um valor menor ou igual a {max}' },
-        { senhaConfirmarSenha: 'As senhas não coincidem' }
+        { senhaConfirmarSenha: 'As senhas não coincidem' },
       ];
 
       //const formControlValidators = this.formControl?.validator!!({} as AbstractControl)
@@ -138,7 +140,7 @@ export class InputTextComponent
 
   constructor(
     @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     if (this.controlContainer) {
@@ -146,6 +148,11 @@ export class InputTextComponent
         this.formControl = this.controlContainer!!.control!!.get(
           this.formControlName
         );
+        if (this.type === 'password') {
+          this.icon = 'visibility_off';
+          this.iconPosition = 'right';
+          this.iconAction = this.togglePasswordVisibility.bind(this);
+        }
       } else {
         console.warn(
           'Missing FormControlName directive from host element of the component'
@@ -191,5 +198,10 @@ export class InputTextComponent
 
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
+  }
+
+  togglePasswordVisibility() {
+    this.type = this.type === 'password' ? 'text' : 'password';
+    this.icon = this.type === 'password' ? 'visibility_off' : 'visibility';
   }
 }

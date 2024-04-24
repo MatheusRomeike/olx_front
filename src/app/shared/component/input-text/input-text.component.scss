@@ -1,0 +1,16 @@
+.div-icon {
+  height: 24px;
+}
+
+.input-group-text {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.is-valid {
+  border-color: var(--bs-form-valid-border-color);
+}
+
+.is-invalid {
+  border-color: var(--bs-form-invalid-border-color);
+}
