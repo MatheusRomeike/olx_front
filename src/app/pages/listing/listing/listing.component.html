@@ -1,0 +1,22 @@
+<form [formGroup]="form" class="row">
+  <div
+    input-text
+    [formControlName]="'titulo'"
+    [label]="'Título'"
+    [id]="'titulo'"
+    [placeholder]="'Informe o título...'"
+  ></div>
+  <div
+  input-text
+  [formControlName]="'descricao'"
+    [label]="'Descrição'"
+    [id]="'descricao'"
+    [placeholder]="'Informe a descricao...'"
+  ></div>
+  <div
+  input-text
+  [formControlName]="'preco'"
+    [label]="'Preço'"
+    [id]="'preco'"
+  ></div>
+</form>

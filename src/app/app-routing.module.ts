@@ -21,6 +21,13 @@ const routes: Routes = [
             (m) => m.AccountsModule
           ),
       },
+      {
+        path: 'anuncio',
+        loadChildren: () =>
+          import('./pages/listing/listing.module').then(
+            (m) => m.ListingModule
+          ),
+      },
     ],
   },
 ];
