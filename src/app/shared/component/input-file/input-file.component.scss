@@ -1,6 +1,6 @@
 .drag-drop-zone {
   border: 2px dashed #ccc;
-  padding: 20px;
+
   text-align: center;
   height: 300px;
   width: 100%;
@@ -44,8 +44,29 @@
   height: 38px !important;
 }
 
-.img-thumbnail {
-  height: 200px !important;
+.image-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.image-container img {
+  transition: 0.3s;
+  height: 100%;
+  width: 100%;
+}
+
+.image-container:hover img {
+  filter: brightness(0.5);
+}
+
+.image-container .mt-3 {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .files-selected {
