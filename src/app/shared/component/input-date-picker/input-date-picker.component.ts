@@ -41,7 +41,9 @@ export class InputDatePickerComponent
   extends BaseCustomInputComponent
   implements OnInit, AfterViewInit
 {
-  @Input() columnSize = 3;
+  @Input() columnSize: number | string = 3;
+  @Input() columnSizeMd: number | null | string = null;
+  @Input() columnSizeLg: number | null | string = null;
   @Input() label = '';
   @Input() disabled: boolean;
   @Input() id: string = '';
@@ -163,6 +165,6 @@ export class InputDatePickerComponent
   }
 
   ngAfterViewInit(): void {
-    applyColumn(this.id, this.columnSize);
+    applyColumn(this.id, this.columnSize, this.columnSizeMd, this.columnSizeLg);
   }
 }

@@ -21,6 +21,13 @@ const routes: Routes = [
             (m) => m.AccountsModule
           ),
       },
+      {
+        path: 'configuracoes',
+        loadChildren: () =>
+          import('./pages/settings/settings.module').then(
+            (m) => m.SettingsModule
+          ),
+      },
     ],
   },
   {
@@ -34,4 +41,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
