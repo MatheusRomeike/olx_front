@@ -133,7 +133,6 @@ export class InputDatePickerComponent
   override writeValue(value) {
     if (value) {
       const date = new Date(value);
-      console.log(date);
       this.valueDisplay = {
         day: date.getDate(),
         month: date.getMonth() + 1,

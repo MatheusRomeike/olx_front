@@ -58,7 +58,6 @@ export class InputFileComponent {
   }
 
   removeFile(file: File) {
-    console.log('removeFile', file.name);
     this.files = this.files.filter((f) => f !== file);
     this.fileInput.nativeElement.value = '';
     if (this.inputSemConfirmar > 0) {
