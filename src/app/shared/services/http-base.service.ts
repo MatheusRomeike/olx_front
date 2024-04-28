@@ -10,6 +10,10 @@ import { environment } from '../../../environments/environment';
 export class HttpBaseService {
   constructor(private httpClient: HttpClient) {}
 
+  get(url: string) {
+    return firstValueFrom(this.httpClient.get(`${environment.apiUrl}/${url}`));
+  }
+
   getAll(url: string) {
     return firstValueFrom(
       this.httpClient.get(`${environment.apiUrl}/${url}`)
@@ -31,6 +35,12 @@ export class HttpBaseService {
   put(url: string, body: any) {
     return firstValueFrom(
       this.httpClient.put(`${environment.apiUrl}/${url}`, body)
+    );
+  }
+
+  patch(url: string, body: any) {
+    return firstValueFrom(
+      this.httpClient.patch(`${environment.apiUrl}/${url}`, body)
     );
   }
 
