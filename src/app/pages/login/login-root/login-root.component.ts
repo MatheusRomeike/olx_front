@@ -11,8 +11,8 @@ export class LoginRootComponent {
 
   activeId = 'login';
 
-  redirectToRegister() {
-    this.activeId = 'register';
+  redirectTo(tab: 'register' | 'login') {
+    this.activeId = tab;
   }
 
   login() {

@@ -4,3 +4,13 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.login-background {
+  height: 90%;
+}
+
+@media screen and (max-width: 770px) {
+  .background-image {
+    display: none;
+  }
+}

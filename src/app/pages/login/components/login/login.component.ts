@@ -3,6 +3,8 @@ import { Loading } from 'src/app/shared/decorators/loading.decorator';
 import { ToastrMessages } from 'src/app/shared/models/toastr-messages';
 import { LoginService } from '../../services/login.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthJwtService } from 'src/app/shared/services/auth-jwt.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
-  constructor(private loginService: LoginService) { }
+  constructor(
+    private router: Router,
+    private loginService: LoginService,
+    private authJwtService: AuthJwtService
+  ) { }
 
   form;
 
@@ -25,7 +31,8 @@ export class LoginComponent implements OnInit {
     Sucesso: new ToastrMessages({ Titulo: "Logado!" })
   }, true)
   async login() {
-    const formValue = { email: 'aaaa@aaaaaa', senha: 'gabriel123' }
-    const response = await this.loginService.login(formValue);
+    const response = await this.loginService.login(this.form.value);
+    this.authJwtService.token = response.accessToken;
+    this.router.navigate(['/']);
   }
 }
