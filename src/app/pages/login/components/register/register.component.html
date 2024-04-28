@@ -1,5 +1,4 @@
 <div class="container col-10 shadow p-3 mb-5 bg-white rounded">
-  <!-- <h2 class="text-center">Formulário de Registro</h2> -->
   <form [formGroup]="form" class="d-flex flex-column align-items-center">
     <div
       input-text
@@ -42,7 +41,6 @@
       [id]="'confirmaSenha'"
       [placeholder]="'Digite sua senha novamente...'"
     ></div>
-    <!-- [disabled]="form.invalid" -->
     <button class="btn btn-sm btn-primary mt-3"   (click)="cadastrar()">
       Cadastrar
     </button>
