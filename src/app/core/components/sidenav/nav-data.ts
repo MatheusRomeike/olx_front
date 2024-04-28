@@ -26,18 +26,18 @@ export const navbarData: INavbarData[] = [
     ],
   },
   {
-    routeLink: 'settings',
+    routeLink: 'configuracoes',
     icon: 'settings',
-    label: 'Settings',
+    label: 'Configurações',
     expanded: true,
     items: [
       {
-        routeLink: 'settings/profile',
-        label: 'Profile',
+        routeLink: 'configuracoes',
+        label: 'Meu cadastro',
         icon: 'person',
       },
       {
-        routeLink: 'settings/customize',
+        routeLink: 'login',
         label: 'Logout',
       },
     ],

@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 @import "~material-icons/iconfont/material-icons.css";
 @import "bootstrap/scss/bootstrap.scss";
+@import "ngx-toastr/toastr";
 
 * {
   margin: 0;
@@ -12,6 +13,8 @@
 body {
   position: relative;
   font-family: "Roboto", sans-serif;
+  height: 100vh;
+  background-color: #f4f7fa;
 }
 
 .material-icons {

@@ -1,0 +1,47 @@
+<div class="root">
+  <h1>Meu cadastro</h1>
+  <small>Configure o seu cadastro</small>
+
+  <div class="card w-100 h-100">
+    <h5 class="card-header">Dados da conta</h5>
+    <div class="card-body">
+      <form [formGroup]="form" class="row">
+        <div class="col-12 col-sm-6">
+          <div
+            input-text
+            [id]="'nome'"
+            [label]="'Nome'"
+            [formControlName]="'nome'"
+            [placeholder]="'Digite seu nome...'"
+            [columnSize]="'12'"
+          ></div>
+          <div
+            input-date-picker
+            [id]="'dataNascimento'"
+            [label]="'Data de nascimento'"
+            [formControlName]="'dataNascimento'"
+            [columnSize]="'12'"
+          ></div>
+          <div
+            input-text
+            [id]="'email'"
+            [label]="'E-mail'"
+            [formControlName]="'email'"
+            [placeholder]="'Digite seu e-mail...'"
+            [columnSize]="'12'"
+          ></div>
+        </div>
+        <div class="col-12 col-sm-6 d-flex justify-content-center">
+          <div
+            input-file
+            [maxFiles]="1"
+            class="col-12"
+            [id]="'fotoPerfil'"
+            [label]="'Foto de Perfil'"
+            (files)="(fotoPerfil)"
+          ></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

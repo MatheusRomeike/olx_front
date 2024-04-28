@@ -1,0 +1,25 @@
+<div class="container-fluid shadow-lg bg-white rounded">
+  <div class="row">
+    <div class="col-12 col-md-4 col-xl-3">
+      <ul
+        ngbNav
+        #nav="ngbNav"
+        class="nav d-flex d-md-block justify-content-center flex-sm-column"
+      >
+        <li [ngbNavItem]="1">
+          <a ngbNavLink> <app-icon>assignment</app-icon> Meu Cadastro</a>
+          <ng-template ngbNavContent>
+            <app-profile-root></app-profile-root>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+          <a ngbNavLink> <app-icon>receipt_long</app-icon> Relatório</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-12 col-md-8 col-xl-9">
+      <div [ngbNavOutlet]="nav"></div>
+    </div>
+  </div>
+</div>

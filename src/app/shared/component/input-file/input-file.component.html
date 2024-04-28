@@ -1,0 +1,118 @@
+<label
+  *ngIf="label"
+  style="margin-bottom: 0 !important"
+  [for]="id"
+  class="form-label pt-1"
+  >{{ label }}{{ required ? " *" : "" }}</label
+>
+
+<div
+  class="drag-drop-zone"
+  (dragover)="onDragOver($event)"
+  (drop)="onDrop($event)"
+>
+  <div class="select w-100 h-100 d-flex justify-content-center">
+    <div
+      class="h-100 d-flex flex-column justify-content-center"
+      *ngIf="files.length == 0"
+    >
+      <ng-container *ngTemplateOutlet="botaoSelecionar"></ng-container>
+      <p class="text-secondary mb-0">
+        ...ou arraste o{{ maxFiles > 1 ? "s" : "" }} arquivo{{
+          maxFiles > 1 ? "s" : ""
+        }}
+        até aqui
+      </p>
+    </div>
+    <div
+      class="h-100 w-100"
+      *ngIf="files.length > 0 && inputSemConfirmar > 0 && accept == 'image/*'"
+    >
+      <ng-container *ngTemplateOutlet="confirmFile"></ng-container>
+    </div>
+    <div class="h-100 w-100" *ngIf="files.length && inputSemConfirmar == 0">
+      <ng-container *ngTemplateOutlet="filesSelected"></ng-container>
+    </div>
+  </div>
+</div>
+
+<input
+  #fileInput
+  type="file"
+  (change)="onFileSelected($event)"
+  [disabled]="files.length == maxFiles"
+  [accept]="accept"
+  [attr.multiple]="maxFiles > 1"
+  style="display: none"
+/>
+
+<ng-template #botaoSelecionar>
+  <button
+    class="btn btn-primary btn-lg"
+    type="button"
+    (click)="fileInput.click()"
+    [disabled]="files.length == maxFiles"
+  >
+    Selecionar arquivo{{ maxFiles > 1 ? "s" : "" }}
+  </button>
+</ng-template>
+
+<ng-template #confirmFile>
+  <div class="image-container">
+    <img
+      class="img-thumbnail"
+      [src]="getPreviewUrl(files[files.length - inputSemConfirmar])"
+      alt="Imagem selecionada"
+    />
+    <div class="mt-3 d-flex justify-content-center">
+      <button
+        class="btn btn-secondary"
+        type="button"
+        (click)="removeFile(files[files.length - inputSemConfirmar])"
+      >
+        Cancelar
+      </button>
+      <button
+        class="btn btn-primary confirmar"
+        type="button"
+        (click)="confirmarInput()"
+      >
+        Confirmar
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #filesSelected>
+  <div class="d-flex flex-column justify-content-between h-100">
+    <div class="files-selected">
+      <div class="file mt-1" *ngFor="let file of files">
+        <span
+          class="file-name"
+          [ngClass]="{ clickable: accept == 'image/*' }"
+          (click)="openImageModal(file)"
+          >{{ file.name }}</span
+        >
+        <button class="btn btn-link" type="button" (click)="removeFile(file)">
+          <app-icon class="icon-delete">delete</app-icon>
+        </button>
+      </div>
+    </div>
+    <ng-container *ngTemplateOutlet="botaoSelecionar"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #imageModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Visualização da Imagem</h4>
+    <button type="button" class="btn-close" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body text-center">
+    <img [src]="getPreviewUrl(currentFile)" alt="Imagem" class="img-fluid" />
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">
+      Fechar
+    </button>
+  </div>
+</ng-template>

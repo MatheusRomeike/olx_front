@@ -28,7 +28,19 @@ const routes: Routes = [
             (m) => m.ListingModule
           ),
       },
+      {
+        path: 'configuracoes',
+        loadChildren: () =>
+          import('./pages/settings/settings.module').then(
+            (m) => m.SettingsModule
+          ),
+      },
     ],
+  },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./pages/login/login.module').then((m) => m.LoginModule),
   },
 ];
 

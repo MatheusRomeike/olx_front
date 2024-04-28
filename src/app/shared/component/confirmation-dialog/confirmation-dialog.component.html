@@ -11,13 +11,51 @@
       ></button>
     </div>
     <div class="modal-body">
-      <p>{{ modalMessage }}</p>
+      <ng-container *ngTemplateOutlet="icone"></ng-container>
+      <p class="d-flex justify-content-center">{{ modalMessage }}</p>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" (click)="close()">
         Não
       </button>
-      <button type="button" class="btn btn-primary">Sim</button>
+      <ng-container *ngTemplateOutlet="botaoSim"></ng-container>
     </div>
   </div>
 </div>
+
+<ng-template #icone>
+  <div class="d-flex justify-content-center">
+    <app-icon class="icon" *ngIf="confirmableType === confirmar"
+      >check_circle</app-icon
+    >
+    <app-icon class="icon" *ngIf="confirmableType === deletar">delete</app-icon>
+    <app-icon class="icon" *ngIf="confirmableType === informar">info</app-icon>
+  </div>
+</ng-template>
+
+<ng-template #botaoSim>
+  <button
+    type="button"
+    class="btn btn-success"
+    *ngIf="confirmableType == confirmar"
+    (click)="confirm()"
+  >
+    Sim
+  </button>
+  <button
+    type="button"
+    class="btn btn-danger"
+    *ngIf="confirmableType == deletar"
+    (click)="confirm()"
+  >
+    Sim
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    *ngIf="confirmableType == informar"
+    (click)="confirm()"
+  >
+    Sim
+  </button>
+</ng-template>
