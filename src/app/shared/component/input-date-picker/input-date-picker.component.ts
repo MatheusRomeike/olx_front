@@ -16,8 +16,8 @@ import {
 } from '@angular/forms';
 import * as moment from 'moment';
 import { conformToMask } from 'text-mask-core';
-import { BaseCustomInputComponent } from '../base-custom-input/base-custom-input.component';
 import { applyColumn } from '../../utils/form-utils';
+import { BaseCustomInputComponent } from '../base-custom-input/base-custom-input.component';
 
 export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -131,6 +131,7 @@ export class InputDatePickerComponent
   override writeValue(value) {
     if (value) {
       const date = new Date(value);
+      console.log(date);
       this.valueDisplay = {
         day: date.getDate(),
         month: date.getMonth() + 1,
@@ -150,14 +151,14 @@ export class InputDatePickerComponent
   }
 
   blur(event) {
-    console.log(event.target.value);
     this.updateTouched();
     if (event.target.value.length < 10) {
       this.writeValue(null);
       this.valueDisplay = null;
       event.target.value = '';
     } else {
-      this.writeValue(event.target.value);
+      const date = moment(event.target.value, 'DD/MM/YYYY');
+      this.writeValue(date.toDate());
     }
   }
 

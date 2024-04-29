@@ -1,10 +1,12 @@
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppInjector } from 'src/app/app-injector';
 import { ConfirmationDialogComponent } from '../component/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmableType } from '../enums/confirmable-type.enum';
 
 export function Confirmable(
   message: string = 'Você tem certeza que deseja executar essa operação?',
-  showWhen: Function = () => true
+  showWhen: Function = () => true,
+  confirmableType: ConfirmableType
 ): MethodDecorator {
   return function (target: Function, key: string, descriptor: any) {
     const originalMethod = descriptor.value;
@@ -22,6 +24,7 @@ export function Confirmable(
         });
         modalRef.componentInstance.modalRef = modalRef;
         modalRef.componentInstance.modalMessage = message;
+        modalRef.componentInstance.confirmableType = confirmableType;
 
         modalRef.componentInstance.onConfirmed.subscribe(async () => {
           modalRef.componentInstance.loading = true;

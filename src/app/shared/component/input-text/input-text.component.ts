@@ -42,7 +42,7 @@ export class InputTextComponent
   @ContentChild('dropdownMenuItems')
   dropdownMenuItems: TemplateRef<any> | undefined;
 
-  @Input() columnSize: number | string = 3;
+  @Input() columnSize: number | string = 8;
   @Input() columnSizeMd: number | null | string = null;
   @Input() columnSizeLg: number | null | string = null;
 
@@ -56,6 +56,7 @@ export class InputTextComponent
   @Input() readOnly = false;
   @Input() icon = '';
   @Input() iconPosition: 'left' | 'right' = 'left';
+  @Input() iconAction: () => void = () => {};
   @Input() showStatusIndicator = true;
   @Input() min: number | undefined = undefined;
   @Input() max: number | undefined = undefined;
@@ -108,6 +109,7 @@ export class InputTextComponent
         { maxlength: 'Digite no máximo {requiredLength} caracteres' },
         { min: 'Digite um valor maior ou igual a {min}' },
         { max: 'Digite um valor menor ou igual a {max}' },
+        { senhaConfirmarSenha: 'As senhas não coincidem' },
       ];
 
       //const formControlValidators = this.formControl?.validator!!({} as AbstractControl)
@@ -116,8 +118,6 @@ export class InputTextComponent
       const validationMessage = validationMessages.filter((item) => {
         return item[Object.keys(this.formControl.errors)[0]];
       })[0] as any;
-
-      console.log('validationMessage', validationMessage);
 
       let message = validationMessage[
         Object.keys(this.formControl.errors)[0]
@@ -148,6 +148,11 @@ export class InputTextComponent
         this.formControl = this.controlContainer!!.control!!.get(
           this.formControlName
         );
+        if (this.type === 'password') {
+          this.icon = 'visibility_off';
+          this.iconPosition = 'right';
+          this.iconAction = this.togglePasswordVisibility.bind(this);
+        }
       } else {
         console.warn(
           'Missing FormControlName directive from host element of the component'
@@ -193,5 +198,10 @@ export class InputTextComponent
 
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
+  }
+
+  togglePasswordVisibility() {
+    this.type = this.type === 'password' ? 'text' : 'password';
+    this.icon = this.type === 'password' ? 'visibility_off' : 'visibility';
   }
 }
