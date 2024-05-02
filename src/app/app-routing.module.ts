@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './core/layouts/default-layout/default-layout.component';
+import { authGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: 'dashboard',
@@ -39,6 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    // canDeactivate: [authGuard], impede o user de acessar essa rota logado ?
     loadChildren: () =>
       import('./pages/login/login.module').then((m) => m.LoginModule),
   },

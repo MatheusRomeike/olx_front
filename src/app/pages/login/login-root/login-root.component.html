@@ -7,13 +7,13 @@
           <li [ngbNavItem]="'login'" [destroyOnHide]="true">
             <button ngbNavLink>ENTRAR</button>
             <ng-template ngbNavContent>
-              <app-login (redirectToRegisterEvent)="redirectToRegister()"></app-login>
+              <app-login></app-login>
             </ng-template>
           </li>
           <li [ngbNavItem]="'register'">
             <button ngbNavLink>REGISTRAR</button>
             <ng-template ngbNavContent>
-              <app-register></app-register>
+              <app-register (redirectToEvent)="redirectTo('login')" ></app-register>
             </ng-template>
           </li>
         </ul>

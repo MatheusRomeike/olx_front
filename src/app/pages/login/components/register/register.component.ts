@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import {
   AbstractControl,
@@ -18,7 +18,9 @@ import { ConfirmableType } from 'src/app/shared/enums/confirmable-type.enum';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent implements OnInit {
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService) { }
+  
+  @Output() redirectToEvent: EventEmitter<boolean> = new EventEmitter();
 
   form;
 
@@ -70,14 +72,7 @@ export class RegisterComponent implements OnInit {
     true
   )
   async cadastrar() {
-    const formValue = {
-      nome: 'aaaaaaa',
-      email: 'aaaa@aaaaaa',
-      dataNascimento: new Date('1999-06-17'),
-      senha: 'gabriel123',
-      confirmaSenha: 'gabriel123',
-    };
-
-    const response = await this.loginService.cadastrar(formValue);
+    await this.loginService.cadastrar(this.form.value);
+    this.redirectToEvent.emit();
   }
 }

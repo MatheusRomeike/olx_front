@@ -42,7 +42,7 @@ export class InputTextComponent
   @ContentChild('dropdownMenuItems')
   dropdownMenuItems: TemplateRef<any> | undefined;
 
-  @Input() columnSize: number | string = 3;
+  @Input() columnSize: number | string = 8;
   @Input() columnSizeMd: number | null | string = null;
   @Input() columnSizeLg: number | null | string = null;
 

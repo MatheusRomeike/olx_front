@@ -1,9 +1,8 @@
 <div class="container col-10 shadow p-3 mb-5 bg-white rounded">
-  <!-- <h2 class="text-center">Formulário de Registro</h2> -->
   <form [formGroup]="form" class="d-flex flex-column align-items-center">
     <div
       input-text
-      [columnSize]="8"
+      [columnSize]="10"
       [formControlName]="'nome'"
       [label]="'Nome'"
       [id]="'nome'"
@@ -11,15 +10,15 @@
     ></div>
     <div
       input-text
-      [columnSize]="8"
+      [columnSize]="10"
       [formControlName]="'email'"
       [label]="'Email'"
-      [id]="'email'"
+      [id]="'email-register'"
       [placeholder]="'Informe o Email...'"
     ></div>
     <div
       input-date-picker
-      [columnSize]="8"
+      [columnSize]="10"
       [formControlName]="'dataNascimento'"
       [label]="'Data de Nascimento'"
       [id]="'dataNascimento'"
@@ -27,23 +26,22 @@
     <div
       input-text
       [type]="'password'"
-      [columnSize]="8"
+      [columnSize]="10"
       [formControlName]="'senha'"
       [label]="'Senha'"
-      [id]="'senha'"
+      [id]="'senha-register'"
       [placeholder]="'Digite sua senha...'"
     ></div>
     <div
       input-text
       [type]="'password'"
-      [columnSize]="8"
+      [columnSize]="10"
       [formControlName]="'confirmaSenha'"
       [label]="'Confirmar senha'"
       [id]="'confirmaSenha'"
       [placeholder]="'Digite sua senha novamente...'"
     ></div>
-    <!-- [disabled]="form.invalid" -->
-    <button class="btn btn-sm btn-primary mt-3"   (click)="cadastrar()">
+    <button class="btn btn-sm btn-primary mt-3" [disabled]="form.invalid"   (click)="cadastrar()">
       Cadastrar
     </button>
   </form>
