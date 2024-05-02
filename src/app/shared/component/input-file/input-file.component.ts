@@ -2,7 +2,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  EventEmitter,
   Input,
+  Output,
   ViewChild,
 } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -27,6 +29,7 @@ export class InputFileComponent {
   @Input() label;
   @Input() required;
   @Input() id;
+  @Output() filesChange = new EventEmitter<File[]>();
   currentFile: File | null = null;
   inputSemConfirmar = 0;
   accept = 'image/*';
@@ -55,7 +58,6 @@ export class InputFileComponent {
   }
 
   removeFile(file: File) {
-    console.log('removeFile', file.name);
     this.files = this.files.filter((f) => f !== file);
     this.fileInput.nativeElement.value = '';
     if (this.inputSemConfirmar > 0) {
@@ -82,6 +84,7 @@ export class InputFileComponent {
 
   confirmarInput() {
     if (this.accept === 'image/*') this.inputSemConfirmar -= 1;
+    this.filesChange.emit(this.files);
   }
 
   openImageModal(file: any) {

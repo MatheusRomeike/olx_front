@@ -38,9 +38,17 @@
             class="col-12"
             [id]="'fotoPerfil'"
             [label]="'Foto de Perfil'"
-            (files)="(fotoPerfil)"
+            [files]="fotoPerfil"
+            (filesChange)="fotoPerfil = $event"
           ></div>
         </div>
+        <button
+          class="btn btn-success col-12 mt-3"
+          [disabled]="!form.valid"
+          (click)="AtualizarAsync()"
+        >
+          Salvar
+        </button>
       </form>
     </div>
   </div>
