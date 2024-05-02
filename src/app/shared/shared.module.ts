@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ngfModule } from 'angular-file';
 import { ToastNoAnimationModule } from 'ngx-toastr';
 import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
 import { IconComponent } from './component/icon/icon.component';
@@ -47,7 +46,6 @@ import { LoadingComponent } from './component/loading/loading.component';
     RouterModule,
     NgbModule,
     ToastNoAnimationModule.forRoot(),
-    ngfModule,
   ],
 })
 export class SharedModule {}
