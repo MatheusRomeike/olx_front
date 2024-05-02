@@ -41,7 +41,9 @@ export class InputDatePickerComponent
   extends BaseCustomInputComponent
   implements OnInit, AfterViewInit
 {
-  @Input() columnSize = 3;
+  @Input() columnSize: number | string = 3;
+  @Input() columnSizeMd: number | null | string = null;
+  @Input() columnSizeLg: number | null | string = null;
   @Input() label = '';
   @Input() disabled: boolean;
   @Input() id: string = '';
@@ -131,7 +133,6 @@ export class InputDatePickerComponent
   override writeValue(value) {
     if (value) {
       const date = new Date(value);
-      console.log(date);
       this.valueDisplay = {
         day: date.getDate(),
         month: date.getMonth() + 1,
@@ -163,6 +164,6 @@ export class InputDatePickerComponent
   }
 
   ngAfterViewInit(): void {
-    applyColumn(this.id, this.columnSize);
+    applyColumn(this.id, this.columnSize, this.columnSizeMd, this.columnSizeLg);
   }
 }
