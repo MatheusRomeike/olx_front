@@ -30,11 +30,10 @@ export function Loading(
           );
         }
       } catch (error) {
+        console.log(error);
         let titulo = `${mensagens?.Erro?.Titulo ?? 'Erro'}`;
-        let conteudo = `${
-          mensagens?.Erro?.Conteudo ?? 'Ocorreu um erro inesperado'
-        }`;
-        if (mostrarErroApi) conteudo += ` ${error?.error}`;
+        let conteudo = `${mensagens?.Erro?.Conteudo ?? ''}`;
+        if (mostrarErroApi) conteudo += ` ${validateError(error)}`;
 
         toastrService.error(conteudo, titulo);
       } finally {
@@ -44,4 +43,13 @@ export function Loading(
 
     return descriptor;
   } as any;
+}
+function validateError(error) {
+  if (error?.error) {
+    return error.error;
+  } else if (error.status == 401) {
+    return 'Token inválido ou expirado. Faça login novamente.';
+  } else {
+    return 'Ocorreu um erro inesperado.';
+  }
 }
