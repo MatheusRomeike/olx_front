@@ -6,9 +6,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './listing.component.html',
   styleUrls: ['./listing.component.scss']
 })
-export class ListingComponent implements OnInit {
+export class ListingComponent {
   form 
-  constructor() { }
 
   ngOnInit() {
     this.form = new FormGroup({
