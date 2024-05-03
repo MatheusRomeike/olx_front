@@ -4,11 +4,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-listing',
   templateUrl: './listing.component.html',
-  styleUrls: ['./listing.component.scss']
+  styleUrls: ['./listing.component.scss'],
 })
 export class ListingComponent {
-  form 
-  fotos: Array<any> = new Array<any>()
+  form;
+  fotos: Array<any> = new Array<any>();
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -23,8 +23,8 @@ export class ListingComponent {
         Validators.maxLength(60),
       ]),
       preco: new FormControl('', [Validators.required]),
+      categoria: new FormControl('', [Validators.required]),
       estado: new FormControl(''),
     });
   }
-
 }
