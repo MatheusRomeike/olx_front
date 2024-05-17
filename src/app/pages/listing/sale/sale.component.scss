@@ -1,0 +1,49 @@
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+  }
+  
+  .carousel-inner img {
+    height: 400px; /* Ajuste a altura conforme necessário */
+    object-fit: cover;
+  }
+  
+  .card-title {
+    font-size: 1.75rem;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    font-size: 1.5rem;
+  }
+  
+  .btn-primary {
+    background-color: #0057ff;
+    border-color: #0057ff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #004fc4;
+    border-color: #0047a2;
+  }
+  
+  .mt-4 {
+    margin-top: 1.5rem !important;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .p-3 {
+    padding: 1rem !important;
+  }
+  
+  .card-body.p-0 {
+    padding: 0 !important;
+  }
+  
+  .card-body hr {
+    margin: 1rem 0;
+  }
+  

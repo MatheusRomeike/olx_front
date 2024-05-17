@@ -42,4 +42,9 @@ export const navbarData: INavbarData[] = [
       },
     ],
   },
+  {
+    routeLink: 'anuncio',
+    icon: 'add',
+    label: 'Anunciar'
+  },
 ];

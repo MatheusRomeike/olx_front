@@ -17,6 +17,10 @@
         </li>
         <li [ngbNavItem]="3">
           <a ngbNavLink> <app-icon>list</app-icon> Meus Anúncios</a>
+          <ng-template ngbNavContent>
+            <app-my-listings></app-my-listings>
+          </ng-template>
+
         </li>
       </ul>
     </div>
