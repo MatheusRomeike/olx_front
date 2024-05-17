@@ -52,10 +52,7 @@ export class SidenavComponent implements OnInit {
     this.screenWidth = window.innerWidth;
     if (this.screenWidth <= 768) {
       this.collapsed = false;
-      this.onToggleSideNav.emit({
-        collapsed: this.collapsed,
-        screenWidth: this.screenWidth,
-      });
+      this.changeCollapse();
     }
   }
 
@@ -67,18 +64,12 @@ export class SidenavComponent implements OnInit {
 
   toggleCollapse(): void {
     this.collapsed = !this.collapsed;
-    this.onToggleSideNav.emit({
-      collapsed: this.collapsed,
-      screenWidth: this.screenWidth,
-    });
+    this.changeCollapse();
   }
 
   closeSidenav(): void {
     this.collapsed = false;
-    this.onToggleSideNav.emit({
-      collapsed: this.collapsed,
-      screenWidth: this.screenWidth,
-    });
+    this.changeCollapse();
   }
 
   handleClick(item: INavbarData): void {
@@ -86,6 +77,7 @@ export class SidenavComponent implements OnInit {
     item.expanded = !item.expanded;
     if (item.items && item.items.length > 0 && !this.collapsed) {
       this.collapsed = true;
+      this.changeCollapse();
     }
   }
 
@@ -101,5 +93,12 @@ export class SidenavComponent implements OnInit {
         }
       }
     }
+  }
+
+  changeCollapse(): void {
+    this.onToggleSideNav.emit({
+      collapsed: this.collapsed,
+      screenWidth: this.screenWidth,
+    });
   }
 }

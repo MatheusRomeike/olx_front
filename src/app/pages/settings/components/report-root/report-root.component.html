@@ -1,0 +1,40 @@
+<div class="col-12" id="chart">
+  <b class="text-center">Relatório de anúncios e contatos</b>
+  <form [formGroup]="form" class="row d-flex justify-content-end my-3">
+    <div
+      input-date-picker
+      [columnSize]="12"
+      [columnSizeLg]="3"
+      [formControlName]="'dataInicial'"
+      [label]="'Data inicial'"
+      [placeholder]="'Data inicial'"
+      [id]="'dataInicial'"
+    ></div>
+    <div
+      input-date-picker
+      [columnSize]="12"
+      [columnSizeLg]="3"
+      [formControlName]="'dataFinal'"
+      [label]="'Data final'"
+      [placeholder]="'Data final'"
+      [id]="'dataFinal'"
+    ></div>
+  </form>
+
+  <apx-chart
+    [series]="totalizadores"
+    [chart]="chartOptions.chart"
+    [labels]="chartOptions.labels"
+    [responsive]="chartOptions.responsive"
+  ></apx-chart>
+</div>
+<div class="col-12 mt-3">
+  <app-paginated-grid
+    [data]="filteredTableData"
+    [columns]="tableColumns"
+    [captions]="tableCaptions"
+    [itemsPerPage]="5"
+    [currentPage]="currentPage"
+    [options]="tableOptions"
+  ></app-paginated-grid>
+</div>

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ngfModule } from 'angular-file';
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { ToastNoAnimationModule } from 'ngx-toastr';
 import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
 import { IconComponent } from './component/icon/icon.component';
@@ -14,6 +14,7 @@ import { InputFileComponent } from './component/input-file/input-file.component'
 import { InputSelectOptionComponent } from './component/input-select-option/input-select-option.component';
 import { InputTextComponent } from './component/input-text/input-text.component';
 import { LoadingComponent } from './component/loading/loading.component';
+import { PaginatedGridComponent } from './component/paginated-grid/paginated-grid.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { LoadingComponent } from './component/loading/loading.component';
     LoadingComponent,
     ConfirmationDialogComponent,
     InputFileComponent,
+    PaginatedGridComponent,
   ],
   exports: [
     IconComponent,
@@ -39,6 +41,8 @@ import { LoadingComponent } from './component/loading/loading.component';
     ToastNoAnimationModule,
     ConfirmationDialogComponent,
     InputFileComponent,
+    NgApexchartsModule,
+    PaginatedGridComponent,
   ],
   imports: [
     CommonModule,
@@ -47,7 +51,7 @@ import { LoadingComponent } from './component/loading/loading.component';
     RouterModule,
     NgbModule,
     ToastNoAnimationModule.forRoot(),
-    ngfModule,
+    NgApexchartsModule,
   ],
 })
 export class SharedModule {}

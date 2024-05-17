@@ -24,6 +24,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'anuncio',
+        loadChildren: () =>
+          import('./pages/listing/listing.module').then(
+            (m) => m.ListingModule
+          ),
+      },
+      {
         path: 'configuracoes',
         loadChildren: () =>
           import('./pages/settings/settings.module').then(
