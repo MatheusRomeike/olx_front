@@ -9,11 +9,14 @@
         <li [ngbNavItem]="1">
           <a ngbNavLink> <app-icon>assignment</app-icon> Meu Cadastro</a>
           <ng-template ngbNavContent>
-            <app-profile-root></app-profile-root>
+            <!-- <app-profile-root></app-profile-root> -->
           </ng-template>
         </li>
         <li [ngbNavItem]="2">
           <a ngbNavLink> <app-icon>receipt_long</app-icon> Relatório</a>
+          <ng-template ngbNavContent>
+            <app-report-root></app-report-root>
+          </ng-template>
         </li>
         <li [ngbNavItem]="3">
           <a ngbNavLink> <app-icon>list</app-icon> Meus Anúncios</a>
