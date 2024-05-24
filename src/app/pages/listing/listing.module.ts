@@ -6,12 +6,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ListingComponent } from './listing/listing.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SaleComponent } from './sale/sale.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 
 @NgModule({
   declarations: [ListingComponent, SaleComponent],
   imports: [
     CommonModule,
-    ListingRoutingModule, SharedModule, ReactiveFormsModule]
+    ListingRoutingModule, SharedModule, ReactiveFormsModule, SlickCarouselModule]
 })
 export class ListingModule { }
