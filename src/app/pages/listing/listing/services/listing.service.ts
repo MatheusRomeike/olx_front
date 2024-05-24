@@ -12,7 +12,7 @@ export class ListingService {
     return response;
   }
 
-  public async Update(dados): Promise<any> {
+  public async Update(dados){
     const response = await this.http.patch('anuncio/Update', dados);
     return response;
   }

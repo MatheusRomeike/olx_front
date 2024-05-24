@@ -14,7 +14,7 @@
   <div class="select w-100 h-100 d-flex justify-content-center">
     <div
       class="h-100 d-flex flex-column justify-content-center"
-      *ngIf="files.length == 0"
+      *ngIf="files?.length == 0"
     >
       <ng-container *ngTemplateOutlet="botaoSelecionar"></ng-container>
       <p class="text-secondary mb-0">
@@ -26,11 +26,11 @@
     </div>
     <div
       class="h-100 w-100"
-      *ngIf="files.length > 0 && inputSemConfirmar > 0 && accept == 'image/*'"
+      *ngIf="files?.length > 0 && inputSemConfirmar > 0 && accept == 'image/*'"
     >
       <ng-container *ngTemplateOutlet="confirmFile"></ng-container>
     </div>
-    <div class="h-100 w-100" *ngIf="files.length && inputSemConfirmar == 0">
+    <div class="h-100 w-100" *ngIf="files?.length && inputSemConfirmar == 0">
       <ng-container *ngTemplateOutlet="filesSelected"></ng-container>
     </div>
   </div>
@@ -40,7 +40,7 @@
   #fileInput
   type="file"
   (change)="onFileSelected($event)"
-  [disabled]="files.length == maxFiles"
+  [disabled]="files?.length == maxFiles"
   [accept]="accept"
   [attr.multiple]="maxFiles > 1"
   style="display: none"
@@ -51,7 +51,7 @@
     class="btn btn-primary btn-lg"
     type="button"
     (click)="fileInput.click()"
-    [disabled]="files.length == maxFiles"
+    [disabled]="files?.length == maxFiles"
   >
     Selecionar arquivo{{ maxFiles > 1 ? "s" : "" }}
   </button>
@@ -61,14 +61,14 @@
   <div class="image-container">
     <img
       class="img-thumbnail"
-      [src]="getPreviewUrl(files[files.length - inputSemConfirmar])"
+      [src]="getPreviewUrl(files[files?.length - inputSemConfirmar])"
       alt="Imagem selecionada"
     />
     <div class="mt-3 d-flex justify-content-center">
       <button
         class="btn btn-secondary"
         type="button"
-        (click)="removeFile(files[files.length - inputSemConfirmar])"
+        (click)="removeFile(files[files?.length - inputSemConfirmar])"
       >
         Cancelar
       </button>
