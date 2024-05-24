@@ -7,6 +7,7 @@ import { ListingComponent } from './listing/listing.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SaleComponent } from './sale/sale.component';
 import { AdListComponent } from './list/ad-list.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 
 @NgModule({
@@ -15,6 +16,8 @@ import { AdListComponent } from './list/ad-list.component';
     CommonModule,
     ListingRoutingModule,
     SharedModule,
-    ReactiveFormsModule]
+    ReactiveFormsModule,
+    SlickCarouselModule
+  ]
 })
 export class ListingModule { }

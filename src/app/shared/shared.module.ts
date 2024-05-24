@@ -13,6 +13,7 @@ import { InputFileComponent } from './component/input-file/input-file.component'
 import { InputSelectOptionComponent } from './component/input-select-option/input-select-option.component';
 import { InputTextComponent } from './component/input-text/input-text.component';
 import { LoadingComponent } from './component/loading/loading.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { LoadingComponent } from './component/loading/loading.component';
   ],
   imports: [
     CommonModule,
+    SlickCarouselModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,

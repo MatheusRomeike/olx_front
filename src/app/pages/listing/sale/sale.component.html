@@ -1,17 +1,19 @@
 <div class="container mt-4">
+  <h1 class="">{{ objeto?.titulo }}</h1>
+
   <div class="card p-3">
     <div class="row">
       <!-- Coluna da Esquerda: Carrossel de Imagens -->
       <div class="col-md-8 mb-4">
         <div class="card">
           <div class="card-body p-0">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <!-- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
               <ol class="carousel-indicators">
-                <li *ngFor="let imagem of imagens; let i = index" [attr.data-target]="'#carouselExampleIndicators'" [attr.data-slide-to]="i" [class.active]="i === 0"></li>
+                <li *ngFor="let imagem of fotos; let i = index" [attr.data-target]="'#carouselExampleIndicators'" [attr.data-slide-to]="i" [class.active]="i === 0"></li>
               </ol>
               <div class="carousel-inner">
-                <div *ngFor="let imagem of imagens; let i = index" class="carousel-item" [class.active]="i === 0">
-                  <img class="d-block w-100" [src]="imagem" alt="Slide {{i}}">
+                <div *ngFor="let imagem of fotos; let i = index" class="carousel-item" [class.active]="i === 0">
+                  <img class="d-block w-100" [src]="getPreviewUrl(imagem)" alt="Slide {{i}}">
                 </div>
               </div>
               <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -22,7 +24,15 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
               </a>
+            </div> -->
+            <ngx-slick-carousel class="carousel" 
+             [config]="slideConfig" > 
+            @for (slide of fotos; track slide.img) {
+            <div ngxSlickItem class="slide">
+                  <img src="{{ getPreviewUrl(slide) }}" alt="" width="100%">
             </div>
+            }
+            </ngx-slick-carousel>
           </div>
         </div>
         <div class="mt-4">
@@ -35,23 +45,22 @@
         <!-- Informações do Produto -->
         <div class="card mb-4">
           <div class="card-body">
-            <h2 class="card-title">{{ objeto?.titulo }}</h2>
-            <h3 class="card-text text-primary">R$ {{ objeto?.preco.toFixed(2) }}</h3>
-            <button class="btn btn-primary btn-lg btn-block mt-4" (click)="enviarMensagem()">Enviar Mensagem</button>
+            <!-- <h1 class="card-title">{{ objeto?.titulo }}</h1> -->
+            <h3 class="card-text text-custom-color" style="color: #6e0ad6;">R$ {{ objeto?.preco.toFixed(2) }}</h3>
+            <button class="btn btn-primary btn-lg btn-block mt-4" style="background-color: #6e0ad6; border-color: #6e0ad6;" (click)="enviarMensagem()">Enviar Mensagem</button>
           </div>
         </div>
         <!-- Informações do Vendedor -->
         <div class="card">
           <div class="card-body">
             <h5>Informações do vendedor</h5>
-            <p>Helton Linhares</p>
-            <a href="#" class="btn btn-link p-0">Ver perfil</a>
+            <p>{{ objeto?.usuario.nome }}</p>
             <hr>
             <h5>Endereço</h5>
             <p>Cidade Industrial - Curitiba</p>
             <hr>
             <h5>Na OLX desde</h5>
-            <p>2020</p>
+            <p>{{ objeto?.dataCriacao | date:'yyyy' }}</p>
           </div>
         </div>
       </div>

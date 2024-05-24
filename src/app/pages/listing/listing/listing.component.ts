@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ListingService } from './services/listing.service';
 import { ActivatedRoute } from '@angular/router';
 import { HelperService } from 'src/app/shared/services/helper.service';
+import { Loading } from 'src/app/shared/decorators/loading.decorator';
+import { ToastrMessages } from 'src/app/shared/models/toastr-messages';
 
 @Component({
   selector: 'app-listing',
@@ -12,8 +14,8 @@ import { HelperService } from 'src/app/shared/services/helper.service';
 export class ListingComponent {
   form;
   fotos: Array<any> = new Array<any>(); // Adicionei essa variável para armazenar as fotos que o usuário selecionar, e depois enviar junto com o formulário
-  foto
   id
+  categorias
   constructor(   
      private listingService: ListingService,
      private route: ActivatedRoute,
@@ -34,7 +36,7 @@ export class ListingComponent {
         Validators.maxLength(60),
       ]),
       preco: new FormControl('', [Validators.required]),
-      categoria: new FormControl('', [Validators.required]),
+      categoria: new FormControl(''),
       anuncioId: new FormControl(0),
     });
     this.route.params.subscribe(params => {
@@ -45,6 +47,15 @@ export class ListingComponent {
      this.loadById(this.id)
   }
   
+
+  @Loading(
+    {
+      Sucesso: new ToastrMessages({
+        Titulo: 'Anúncio salvo com sucesso!',
+      }),
+    },
+    true
+  )
   public salvar(){
     if(this.id > 0){
       this.form.value.anuncioId = this.id
@@ -70,10 +81,12 @@ export class ListingComponent {
 
   public async loadById(id){
     var objeto = await this.listingService.LoadById(id)
-    objeto.fotos.length > 0 ? this.fotos.push([this.helperService.base64ToFile(objeto.fotos[0], 'Foto 1')]) : null
-    objeto.fotos.length > 1 ? this.fotos.push([this.helperService.base64ToFile(objeto.fotos[1], 'Foto 2')]) : null
-    objeto.fotos.length > 2 ? this.fotos.push([this.helperService.base64ToFile(objeto.fotos[2], 'Foto 3')]) : null
-    objeto.fotos.length > 3 ? this.fotos.push([this.helperService.base64ToFile(objeto.fotos[3], 'Foto 4')]) : null
+    this.fotos = []
+    for (let i = 0; i < Math.min(objeto.fotos.length, 4); i++) {
+      this.fotos.push(this.helperService.base64ToFile(objeto.fotos[i], `Foto ${i + 1}`));
+    }
     this.form.patchValue(objeto);
   }
+
+  
 }
