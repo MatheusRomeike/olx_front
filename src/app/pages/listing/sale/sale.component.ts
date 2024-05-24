@@ -14,6 +14,7 @@ export class SaleComponent implements OnInit {
  id
  fotos = [];
  slideConfig = {"slidesToShow": 4, "slidesToScroll": 4};
+ file
 
  constructor(   
      private listingService: ListingService,
@@ -46,8 +47,8 @@ export class SaleComponent implements OnInit {
   }
 
   getPreviewUrl(file: File): string {
-    console.log(file)
-    return URL.createObjectURL(file);
+
+    return URL.createObjectURL(this.file);
   }
 
 
