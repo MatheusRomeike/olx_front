@@ -6,12 +6,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ListingComponent } from './listing/listing.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SaleComponent } from './sale/sale.component';
+import { AdListComponent } from './list/ad-list.component';
 
 
 @NgModule({
-  declarations: [ListingComponent, SaleComponent],
+  declarations: [ListingComponent, SaleComponent, AdListComponent],
   imports: [
     CommonModule,
-    ListingRoutingModule, SharedModule, ReactiveFormsModule]
+    ListingRoutingModule,
+    SharedModule,
+    ReactiveFormsModule]
 })
 export class ListingModule { }

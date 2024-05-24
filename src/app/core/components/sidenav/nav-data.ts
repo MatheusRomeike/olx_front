@@ -47,4 +47,9 @@ export const navbarData: INavbarData[] = [
     icon: 'add',
     label: 'Anunciar'
   },
+  {
+    routeLink: 'anuncio/lista',
+    icon: 'list',
+    label: 'Anunciar'
+  },
 ];
