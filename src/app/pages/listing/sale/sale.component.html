@@ -7,7 +7,7 @@
       <div class="col-md-8 mb-4">
         <div class="card">
           <div class="card-body p-0">
-            <!-- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
               <ol class="carousel-indicators">
                 <li *ngFor="let imagem of fotos; let i = index" [attr.data-target]="'#carouselExampleIndicators'" [attr.data-slide-to]="i" [class.active]="i === 0"></li>
               </ol>
@@ -24,15 +24,15 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
               </a>
-            </div> -->
-            <ngx-slick-carousel class="carousel" 
+            </div>
+            <!-- <ngx-slick-carousel class="carousel" 
              [config]="slideConfig" > 
             @for (slide of fotos; track slide.img) {
             <div ngxSlickItem class="slide">
                   <img src="{{ getPreviewUrl(slide) }}" alt="" width="100%">
             </div>
             }
-            </ngx-slick-carousel>
+            </ngx-slick-carousel> -->
           </div>
         </div>
         <div class="mt-4">
