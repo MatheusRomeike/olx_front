@@ -1,5 +1,5 @@
 export const environment = {
   name: 'staging',
   production: false,
-  apiUrl: 'http://54.221.103.91/api',
+  apiUrl: 'http://54.236.213.76/api',
 };
