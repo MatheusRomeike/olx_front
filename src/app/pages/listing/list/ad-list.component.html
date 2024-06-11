@@ -33,13 +33,13 @@
   </header>
   <div class="row">
     <div class="col-md-4 mb-3" *ngFor="let ad of filteredAds">
-      <a [routerLink]="'/anuncio/' + ad.id" class="card-link">
+      <a [routerLink]="'/anuncio/' + ad.anuncioId" class="card-link">
         <div class="card">
-          <img [src]="ad.photo" class="card-img-top" alt="{{ ad.title }}">
+          <img [src]="ad.fotos[0]" class="card-img-top" alt="{{ ad.titulo }}">
           <div class="card-body">
-            <h5 class="card-title">{{ ad.title }}</h5>
-            <p class="card-text">Categoria: {{ ad.category }}</p>
-            <p class="card-text">Preço: R$ {{ ad.price }}</p>
+            <h5 class="card-title">{{ ad.titulo }}</h5>
+            <p class="card-text">Categoria: {{ ad.descricao }}</p>
+            <p class="card-text">Preço: R$ {{ ad.preco }}</p>
           </div>
         </div>
       </a>

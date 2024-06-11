@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ListingService } from '../listing/services/listing.service';
+import { ListingService } from '../services/listing.service';
 import { ActivatedRoute } from '@angular/router';
 import { HelperService } from 'src/app/shared/services/helper.service';
 import { Loading } from 'src/app/shared/decorators/loading.decorator';

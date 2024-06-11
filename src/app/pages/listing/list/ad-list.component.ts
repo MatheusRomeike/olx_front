@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Ad } from './ad.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ListingService } from '../services/listing.service';
 
 interface FilterParams {
   minPrice?: number;
@@ -14,40 +14,46 @@ interface FilterParams {
   styleUrls: ['./ad-list.component.scss']
 })
 export class AdListComponent implements OnInit {
-  ads: Ad[] = [
-    { id: 1, title: 'Anúncio 1', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 1', price: 100, category: 'Categoria 1' },
-    { id: 2, title: 'Anúncio 2', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 2', price: 200, category: 'Categoria 2' },
-    { id: 3, title: 'Anúncio 3', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 3', price: 150, category: 'Categoria 3' },
-    { id: 4, title: 'Anúncio 4', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 4', price: 300, category: 'Categoria 1' },
-    { id: 5, title: 'Anúncio 5', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 5', price: 120, category: 'Categoria 2' },
-    { id: 6, title: 'Anúncio 6', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 6', price: 250, category: 'Categoria 3' },
-    { id: 7, title: 'Anúncio 7', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 7', price: 180, category: 'Categoria 1' },
-    { id: 8, title: 'Anúncio 8', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 8', price: 350, category: 'Categoria 2' },
-    { id: 9, title: 'Anúncio 9', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 9', price: 400, category: 'Categoria 1' },
-    { id: 10, title: 'Anúncio 10', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 10', price: 220, category: 'Categoria 2' },
-    { id: 11, title: 'Anúncio 11', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 11', price: 130, category: 'Categoria 3' },
-    { id: 12, title: 'Anúncio 12', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 12', price: 160, category: 'Categoria 1' },
-    { id: 13, title: 'Anúncio 13', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 13', price: 90, category: 'Categoria 2' },
-    { id: 14, title: 'Anúncio 14', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 14', price: 170, category: 'Categoria 3' },
-    { id: 15, title: 'Anúncio 15', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 15', price: 200, category: 'Categoria 1' },
-    { id: 16, title: 'Anúncio 16', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 16', price: 270, category: 'Categoria 2' },
-    { id: 17, title: 'Anúncio 17', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 17', price: 240, category: 'Categoria 3' },
-    { id: 18, title: 'Anúncio 18', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 18', price: 310, category: 'Categoria 1' },
-    { id: 19, title: 'Anúncio 19', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 19', price: 350, category: 'Categoria 2' },
-    { id: 20, title: 'Anúncio 20', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 20', price: 400, category: 'Categoria 3' }
+  ads = [
+    // { anuncioId: 1, title: 'Anúncio 1', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 1', price: 100, category: 'Categoria 1' },
+    // { id: 2, title: 'Anúncio 2', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 2', price: 200, category: 'Categoria 2' },
+    // { id: 3, title: 'Anúncio 3', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 3', price: 150, category: 'Categoria 3' },
+    // { id: 4, title: 'Anúncio 4', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 4', price: 300, category: 'Categoria 1' },
+    // { id: 5, title: 'Anúncio 5', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 5', price: 120, category: 'Categoria 2' },
+    // { id: 6, title: 'Anúncio 6', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 6', price: 250, category: 'Categoria 3' },
+    // { id: 7, title: 'Anúncio 7', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 7', price: 180, category: 'Categoria 1' },
+    // { id: 8, title: 'Anúncio 8', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 8', price: 350, category: 'Categoria 2' },
+    // { id: 9, title: 'Anúncio 9', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 9', price: 400, category: 'Categoria 1' },
+    // { id: 10, title: 'Anúncio 10', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 10', price: 220, category: 'Categoria 2' },
+    // { id: 11, title: 'Anúncio 11', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 11', price: 130, category: 'Categoria 3' },
+    // { id: 12, title: 'Anúncio 12', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 12', price: 160, category: 'Categoria 1' },
+    // { id: 13, title: 'Anúncio 13', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 13', price: 90, category: 'Categoria 2' },
+    // { id: 14, title: 'Anúncio 14', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 14', price: 170, category: 'Categoria 3' },
+    // { id: 15, title: 'Anúncio 15', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 15', price: 200, category: 'Categoria 1' },
+    // { id: 16, title: 'Anúncio 16', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 16', price: 270, category: 'Categoria 2' },
+    // { id: 17, title: 'Anúncio 17', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 17', price: 240, category: 'Categoria 3' },
+    // { id: 18, title: 'Anúncio 18', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 18', price: 310, category: 'Categoria 1' },
+    // { id: 19, title: 'Anúncio 19', photo: 'assets/images/imagem1.jpeg', description: 'Descrição 19', price: 350, category: 'Categoria 2' },
+    // { id: 20, title: 'Anúncio 20', photo: 'assets/images/imagem2.jpeg', description: 'Descrição 20', price: 400, category: 'Categoria 3' }
   ];
 
 
 
-  filteredAds: Ad[] = this.ads;
+  filteredAds = this.ads;
   categories: string[];
   sortDirection: 'asc' | 'desc' = 'asc';
   currentSortBy: string = '';
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private listingService: ListingService
+  ) { }
 
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.ads = await this.listingService.List()
+
     this.categories = this.getUniqueCategories();
 
     // Verifica se há parâmetros de filtro na query string da URL ao carregar a página

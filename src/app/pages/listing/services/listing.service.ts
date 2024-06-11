@@ -22,4 +22,10 @@ export class ListingService {
     const response = await this.http.get(url);
     return response;
   }
+
+  public async List(): Promise<any> {
+    var url = 'anuncio/List'
+    const response = await this.http.get(url);
+    return response;
+  }
 }
