@@ -1,0 +1,15 @@
+<!-- src/pages/chat/chat-root/chat-root.component.html -->
+<h1>Titulo anuncio</h1>
+<div class="chat-container">
+  <div class="messages-container">
+    <div class="message" *ngFor="let message of messages" [ngClass]="message.type">
+      <div class="message-author">{{ message.author }}</div>
+      <div class="message-text">{{ message.text }}</div>
+      <div class="message-timestamp">{{ message.createdAt | date:'short' }}</div>
+    </div>
+  </div>
+  <div class="input-container">
+    <input type="text" [(ngModel)]="newMessageText" placeholder="Digite sua mensagem...">
+    <button (click)="sendMessage()">Enviar</button>
+  </div>
+</div>
