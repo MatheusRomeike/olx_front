@@ -94,15 +94,20 @@ export class ListingComponent {
       });
     }
   }
-
+  
+  @Loading(
+    null,
+    true
+  )
   public async loadById(id){
-    var objeto = await this.listingService.LoadById(id)
+    var objeto = await this.listingService.LoadById(id, 0)
     this.fotos = []
     for (let i = 0; i < Math.min(objeto.fotos.length, 4); i++) {
       this.fotos.push(this.helperService.base64ToFile(objeto.fotos[i], `Foto ${i + 1}`));
     }
     this.form.patchValue(objeto);
   }
+
 
   public async salvarFotos(foto, sequenciaFoto){
     console.log(foto)

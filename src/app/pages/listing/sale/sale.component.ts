@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ListingService } from '../listing/services/listing.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HelperService } from 'src/app/shared/services/helper.service';
 import { Loading } from 'src/app/shared/decorators/loading.decorator';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sale',
@@ -17,11 +18,15 @@ export class SaleComponent implements OnInit {
  slideConfig = {"slidesToShow": 4, "slidesToScroll": 4};
  file
  slides  = []
+ usuarioId
 
  constructor(   
      private listingService: ListingService,
      private route: ActivatedRoute,
-     private helperService: HelperService
+     private router: Router,
+     private helperService: HelperService,
+     private toastrService: ToastrService,
+
   ) { }
 
 
@@ -29,8 +34,9 @@ export class SaleComponent implements OnInit {
   
     this.route.params.subscribe(params => {
       this.id = params['id'];
+      this.usuarioId = params['usuarioId'];
     });
-    this.loadById(this.id)
+    this.loadById()
   }
   
 
@@ -38,16 +44,22 @@ export class SaleComponent implements OnInit {
     null,
     true
   )
-  public async loadById(id){
-    this.objeto = await this.listingService.LoadById(this.id)
-    this.fotos = []
-    for (let i = 0; i < Math.min( this.objeto.fotos.length, 4); i++) {
-      var foto = this.helperService.base64ToFile( this.objeto.fotos[i], `Foto ${i + 1}`)
-      var url = URL.createObjectURL(foto)
-      console.log(url)
-      this.fotos.push(url);
-    }
-    
+  public async loadById(){
+      try{
+        this.objeto = await this.listingService.LoadById(this.id, this.usuarioId)
+        this.fotos = []
+        for (let i = 0; i < Math.min( this.objeto.fotos.length, 4); i++) {
+          var foto = this.helperService.base64ToFile( this.objeto.fotos[i], `Foto ${i + 1}`)
+          var url = URL.createObjectURL(foto)
+          console.log(url)
+          this.fotos.push(url);
+        }
+      }
+      catch(e){
+        // this.router.navigate(['/'])
+        this.toastrService.error('Anúncio não encontrado.')
+        console.error(e)
+      }
     }
     
     enviarMensagem(){

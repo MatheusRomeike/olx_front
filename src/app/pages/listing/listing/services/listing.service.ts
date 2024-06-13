@@ -22,8 +22,8 @@ export class ListingService {
     return response;
   }
 
-  public async LoadById(id): Promise<any> {
-    var url ='anuncio/LoadById?anuncioId='+ id
+  public async LoadById(id, usuarioId): Promise<any> {
+    var url ='anuncio/LoadById?anuncioId='+ id + '&usuarioId=' + usuarioId
     const response = await this.http.get(url);
     return response;
   }
