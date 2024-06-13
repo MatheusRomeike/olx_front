@@ -17,6 +17,10 @@
     font-size: 1.5rem;
   }
   
+  .card-text {
+    font-size: 1.5rem;
+  }
+
   .btn-primary {
     background-color: #6e0ad6;;
     border-color: #6e0ad6;;
@@ -29,6 +33,13 @@
   
   .text-custom-color {
     color: #6e0ad6;
+  }
+
+  .label-descricao{
+    color: #000000; 
+    background-color: #e5e2e7; 
+    border-radius: 10%; 
+    font-size: 15px;
   }
 
   .mt-4 {
@@ -46,9 +57,39 @@
   .card-body.p-0 {
     padding: 0 !important;
   }
+  .carousel-container {
+    height: 40vh;
+    margin: 16px auto;
+}
   
   .card-body hr {
     margin: 1rem 0;
   }
   
+  :host ::ng-deep{
+    .image-container {
+        max-width: 85%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .igx-carousel {
+        max-width: 100%;
+        width: unset;
+    }
+
+    .igx-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 100%;
+        width: unset;
+    }
+
+    .igx-slide img {
+        object-fit: fill;
+        max-width: 90%;
+    }
+}
   

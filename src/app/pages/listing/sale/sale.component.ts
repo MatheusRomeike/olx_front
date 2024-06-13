@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ListingService } from '../listing/services/listing.service';
 import { ActivatedRoute } from '@angular/router';
 import { HelperService } from 'src/app/shared/services/helper.service';
+import { Loading } from 'src/app/shared/decorators/loading.decorator';
 
 @Component({
   selector: 'app-sale',
@@ -33,6 +34,10 @@ export class SaleComponent implements OnInit {
   }
   
 
+  @Loading(
+    null,
+    true
+  )
   public async loadById(id){
     this.objeto = await this.listingService.LoadById(this.id)
     this.fotos = []

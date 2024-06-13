@@ -59,8 +59,6 @@ export class ListingComponent {
     },
     true
   )
-
-
   public async salvar(){
     if(this.id > 0){
       this.form.value.anuncioId = this.id
@@ -124,9 +122,5 @@ export class ListingComponent {
   
   filesChange(evento){
     this.fotos.push(evento)
-
-    // for (let i = 0; i < Math.min(this.form.value.fotos.length, 4); i++) {
-    //   this.fotos.push(this.form.value.fotos[i]);
-    // }
   }
 }
