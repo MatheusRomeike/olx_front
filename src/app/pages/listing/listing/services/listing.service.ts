@@ -12,6 +12,11 @@ export class ListingService {
     return response;
   }
 
+  public async AddFotos(dados): Promise<any> {
+    const response = await this.http.post('anuncio/AddFotos', dados);
+    return response;
+  }
+
   public async Update(dados){
     const response = await this.http.patch('anuncio/Update', dados);
     return response;
@@ -19,6 +24,12 @@ export class ListingService {
 
   public async LoadById(id): Promise<any> {
     var url ='anuncio/LoadById?anuncioId='+ id
+    const response = await this.http.get(url);
+    return response;
+  }
+
+  public async LoadCategorias(): Promise<any> {
+    var url ='anuncio/LoadCategorias'
     const response = await this.http.get(url);
     return response;
   }

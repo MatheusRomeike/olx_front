@@ -36,7 +36,7 @@ export class ListingComponent {
         Validators.maxLength(60),
       ]),
       preco: new FormControl('', [Validators.required]),
-      categoria: new FormControl(''),
+      categoriaId: new FormControl(''),
       anuncioId: new FormControl(0),
     });
     this.route.params.subscribe(params => {
@@ -45,9 +45,12 @@ export class ListingComponent {
     
     if(this.id)
      this.loadById(this.id)
+
+    this.listingService.LoadCategorias().then((res) => {
+      this.categorias = res;
+    });
   }
   
-
   @Loading(
     {
       Sucesso: new ToastrMessages({
@@ -56,7 +59,9 @@ export class ListingComponent {
     },
     true
   )
-  public salvar(){
+
+
+  public async salvar(){
     if(this.id > 0){
       this.form.value.anuncioId = this.id
       this.listingService.Update(this.form.value)
@@ -64,18 +69,27 @@ export class ListingComponent {
     else{
       let formData = new FormData();
       let dados = {
-        ...this.form.value,
-        foto1: this.fotos.length > 0 ? this.fotos[0][0] : null,
-        foto2: this.fotos.length > 1 ? this.fotos[1][0] : null,
-        foto3: this.fotos.length > 2 ? this.fotos[2][0] : null,
-        foto4: this.fotos.length > 3 ? this.fotos[3][0] : null,
+        ...this.form.value
       };
     
       for (let key in dados) {
         formData.append(key, dados[key]);
       }
       
-      this.listingService.Add(formData)
+      var object = await this.listingService.Add(formData)
+      var fotosSalvar = [
+        this.fotos.length > 0 ? this.fotos[0][0] : null,
+        this.fotos.length > 1 ? this.fotos[1][0] : null,
+        this.fotos.length > 2 ? this.fotos[2][0] : null,
+        this.fotos.length > 3 ? this.fotos[3][0] : null,
+        ]
+      this.form.patchValue({anuncioId: object.result})
+      var sequenciaFoto = 0
+      fotosSalvar.forEach(async foto => {  
+        sequenciaFoto++ 
+        if(foto != null)     
+          await this.salvarFotos(foto, sequenciaFoto)
+      });
     }
   }
 
@@ -88,5 +102,19 @@ export class ListingComponent {
     this.form.patchValue(objeto);
   }
 
+  public async salvarFotos(foto, sequenciaFoto){
+    let formData = new FormData();
+      let dados = {
+        ...this.form.value,
+        foto: foto,
+        sequenciaFoto: sequenciaFoto
+      };
+    
+      for (let key in dados) {
+        formData.append(key, dados[key]);
+      }
+      
+      await this.listingService.AddFotos(formData)
+  }
   
 }

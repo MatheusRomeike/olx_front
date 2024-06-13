@@ -43,9 +43,11 @@
           <div
             class="mt-3"
             input-select-option
-            [formControlName]="'categoria'"
+            [formControlName]="'categoriaId'"
             [label]="'Categoria'"
             [id]="'categoria'"
+            [bindLabel]="'descricao'"
+            [bindValue]="'id'"
             [items]="categorias"
             [placeholder]="'Informe a categoria...'"
             [columnSize]="8"
