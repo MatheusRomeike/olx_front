@@ -24,6 +24,8 @@ export class ProfileRootComponent implements OnInit {
       nome: new FormControl('', [Validators.required]),
       dataNascimento: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
+      cidade: new FormControl('', [Validators.required]),
+      bairro: new FormControl('', [Validators.required]),
     });
   }
 

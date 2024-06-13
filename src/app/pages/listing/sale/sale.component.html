@@ -45,7 +45,7 @@
             <p>{{ objeto?.usuario.nome }}</p>
             <hr>
             <h5>Endereço</h5>
-            <p>Cidade Industrial - Curitiba</p>
+            <p>{{ objeto?.usuario.bairro }} - {{ objeto?.usuario.cidade }}</p>
             <hr>
             <h5>Na OLX desde</h5>
             <p>{{ objeto?.dataCriacao | date:'yyyy' }}</p>

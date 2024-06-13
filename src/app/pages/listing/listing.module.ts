@@ -11,12 +11,13 @@ import {
 	IgxCarouselModule,
 	IgxSliderModule
  } from "igniteui-angular";
+import { NgxMaskDirective, NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
   declarations: [ListingComponent, SaleComponent],
   imports: [
     CommonModule,
-    ListingRoutingModule, SharedModule, ReactiveFormsModule, SlickCarouselModule, IgxCarouselModule, IgxSliderModule]
+    ListingRoutingModule, SharedModule, ReactiveFormsModule, SlickCarouselModule, IgxCarouselModule, IgxSliderModule, NgxMaskModule.forRoot()]
 })
 export class ListingModule { }
