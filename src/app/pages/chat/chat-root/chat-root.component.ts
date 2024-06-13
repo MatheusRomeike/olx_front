@@ -1,5 +1,5 @@
 // src/pages/chat/chat-root/chat-root.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChatService } from '../service/chat.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,104 +9,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./chat-root.component.scss']
 })
 export class ChatRootComponent implements OnInit {
-  messages: any[] = [
-    {
-      author: 'Cliente',
-      text: 'Olá, tenho uma dúvida sobre o produto.',
-      createdAt: new Date('2023-06-10T10:15:00'),
-      type: 'received' // Adicionado tipo para diferenciar mensagens
-    },
-    {
-      author: 'Usuário',
-      text: 'Claro, como posso ajudar?',
-      createdAt: new Date('2023-06-10T10:16:00'),
-      type: 'sent' // Adicionado tipo para diferenciar mensagens
-    },
-    {
-      author: 'Cliente',
-      text: 'Gostaria de saber sobre a garantia.',
-      createdAt: new Date('2023-06-10T10:17:00'),
-      type: 'received' // Adicionado tipo para diferenciar mensagens
-    },
-    {
-      author: 'Usuário',
-      text: 'A garantia é de 1 ano para todos os produtos.',
-      createdAt: new Date('2023-06-10T10:18:00'),
-      type: 'sent' // Adicionado tipo para diferenciar mensagens
-    },
-    {
-      author: 'Cliente',
-      text: 'Olá, tenho uma dúvida sobre o produto.',
-      createdAt: new Date('2023-06-10T10:15:00'),
-      type: 'received' // Adicionado tipo para diferenciar mensagens
-    },
-    {
-      author: 'Usuário',
-      text: 'Claro, como posso ajudar?',
-      createdAt: new Date('2023-06-10T10:16:00'),
-      type: 'sent' // Adicionado tipo para diferenciar mensagens
-    },
-    {
-      author: 'Cliente',
-      text: 'Gostaria de saber sobre a garantia.',
-      createdAt: new Date('2023-06-10T10:17:00'),
-      type: 'received' // Adicionado tipo para diferenciar mensagens
-    },
-    {
-      author: 'Usuário',
-      text: 'A garantia é de 1 ano para todos os produtos.',
-      createdAt: new Date('2023-06-10T10:18:00'),
-      type: 'sent' // Adicionado tipo para diferenciar mensagens
-    },
-    {
-      author: 'Cliente',
-      text: 'Olá, tenho uma dúvida sobre o produto.',
-      createdAt: new Date('2023-06-10T10:15:00'),
-      type: 'received' // Adicionado tipo para diferenciar mensagens
-    },
-    {
-      author: 'Usuário',
-      text: 'Claro, como posso ajudar?',
-      createdAt: new Date('2023-06-10T10:16:00'),
-      type: 'sent' // Adicionado tipo para diferenciar mensagens
-    },
-    {
-      author: 'Cliente',
-      text: 'Gostaria de saber sobre a garantia.',
-      createdAt: new Date('2023-06-10T10:17:00'),
-      type: 'received' // Adicionado tipo para diferenciar mensagens
-    },
-    {
-      author: 'Usuário',
-      text: 'A garantia é de 1 ano para todos os produtos.',
-      createdAt: new Date('2023-06-10T10:18:00'),
-      type: 'sent' // Adicionado tipo para diferenciar mensagens
-    },
-    {
-      author: 'Cliente',
-      text: 'Olá, tenho uma dúvida sobre o produto.',
-      createdAt: new Date('2023-06-10T10:15:00'),
-      type: 'received' // Adicionado tipo para diferenciar mensagens
-    },
-    {
-      author: 'Usuário',
-      text: 'Claro, como posso ajudar?',
-      createdAt: new Date('2023-06-10T10:16:00'),
-      type: 'sent' // Adicionado tipo para diferenciar mensagens
-    },
-    {
-      author: 'Cliente',
-      text: 'Gostaria de saber sobre a garantia. Gostaria de saber sobre a garantia. Gostaria de saber sobre a garantia. Gostaria de saber sobre a garantia. Gostaria de saber sobre a garantia. Gostaria de saber sobre a garantia. Gostaria de saber sobre a garantia. Gostaria de saber sobre a garantia. ',
-      createdAt: new Date('2023-06-10T10:17:00'),
-      type: 'received' // Adicionado tipo para diferenciar mensagens
-    },
-    {
-      author: 'Usuário',
-      text: 'A garantia é de 1 ano para todos os produtos.',
-      createdAt: new Date('2023-06-10T10:18:00'),
-      type: 'sent' // Adicionado tipo para diferenciar mensagens
-    },
-  ];
+  @ViewChild('messagesContainer', { static: false }) messagesContainer: ElementRef;
+
+  messages: any[] = [];
   usuarioId
   anuncioId
 
@@ -114,16 +19,13 @@ export class ChatRootComponent implements OnInit {
 
   newMessageText: string = '';
   
-  // constructor() { }
-  
-  // ngOnInit(): void { }
-  
   async ngOnInit() {
     this.route.params.subscribe(params => {
       this.usuarioId = params['usuarioId'];
       this.anuncioId = params['anuncioId']      
     });
-    this.messages = await this.chatService.List({anuncioId: this.anuncioId, usuarioId: this.usuarioId})
+    this.messages = await this.chatService.List({ anuncioId: this.anuncioId, usuarioId: this.usuarioId })
+    this.scrollToBottom()
   }
 
   sendMessage(): void {
@@ -134,6 +36,17 @@ export class ChatRootComponent implements OnInit {
       this.messages.push({ ...message, autor: localStorage.getItem('nomeUsuario'), dataCriacao: new Date(), tipo: 'enviado' });
       this.chatService.Create({...message, usuarioId: this.usuarioId, anuncioId: this.anuncioId})
       this.newMessageText = '';
+      this.scrollToBottom()
+    }
+  }
+
+  private scrollToBottom(): void {
+    try {
+      setTimeout(() => {
+        this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
+      }, 50);
+    } catch (err) {
+      console.error('Scroll to bottom failed:', err);
     }
   }
 }

@@ -1,7 +1,7 @@
 <!-- src/pages/chat/chat-root/chat-root.component.html -->
-<h1>Titulo anuncio</h1>
-<div class="chat-container">
-  <div class="messages-container">
+<!-- <h1>Titulo anuncio</h1> -->
+<div class="chat-container" #messagesContainer>
+  <div class="messages-container" >
     <div class="message" *ngFor="let message of messages" [ngClass]="message.tipo">
       <div class="message-author">{{ message.autor }}</div>
       <div class="message-text">{{ message.texto }}</div>
