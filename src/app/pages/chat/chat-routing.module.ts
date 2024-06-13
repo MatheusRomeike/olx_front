@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ChatRootComponent } from './chat-root/chat-root.component';
 
 const routes: Routes = [
-  { path: '', component: ChatRootComponent },
+  { path: ':anuncioId/:usuarioId', component: ChatRootComponent },
 ];
 
 @NgModule({

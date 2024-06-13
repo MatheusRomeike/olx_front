@@ -1,6 +1,7 @@
 // src/pages/chat/chat-root/chat-root.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../service/chat.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chat-root',
@@ -106,29 +107,33 @@ export class ChatRootComponent implements OnInit {
       type: 'sent' // Adicionado tipo para diferenciar mensagens
     },
   ];
+  usuarioId
+  anuncioId
 
-  constructor(private chatService: ChatService) { }
+  constructor(private chatService: ChatService, private route: ActivatedRoute,) { }
 
   newMessageText: string = '';
-
+  
   // constructor() { }
-
-  ngOnInit(): void { }
+  
+  // ngOnInit(): void { }
+  
+  async ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.usuarioId = params['usuarioId'];
+      this.anuncioId = params['anuncioId']      
+    });
+    this.messages = await this.chatService.List({anuncioId: this.anuncioId, usuarioId: this.usuarioId})
+  }
 
   sendMessage(): void {
     if (this.newMessageText.trim() !== '') {
-      this.messages.push({
-        author: 'Usuário',
-        text: this.newMessageText,
-        createdAt: new Date(),
-        type: 'sent'
-      });
+      const message = {
+        texto: this.newMessageText,
+      }
+      this.messages.push({ ...message, autor: localStorage.getItem('nomeUsuario'), dataCriacao: new Date(), tipo: 'enviado' });
+      this.chatService.Create({...message, usuarioId: this.usuarioId, anuncioId: this.anuncioId})
       this.newMessageText = '';
     }
-
-  // ngOnInit(): void {
-    // this.chatService.getMessages().subscribe((data: any[]) => {
-    //   this.messages = data;
-    // });
   }
 }

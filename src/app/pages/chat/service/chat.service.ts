@@ -1,17 +1,22 @@
 // src/pages/chat/chat.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HttpBaseService } from 'src/app/shared/services/http-base.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  private apiUrl = 'http://suaapi.com/mensagens'; // Substitua pela URL da sua API
+  constructor(private http: HttpBaseService) {}
 
-  constructor(private http: HttpClient) { }
+  public async List(parametros): Promise<any> {
+    const { anuncioId, usuarioId } = parametros;
 
-  getMessages(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+    return await this.http.get(`Mensagem/chat?anuncioId=${anuncioId}&usuarioInteressadoId=${usuarioId}`)
+  }
+
+  public async Create(dados): Promise<any> {
+    const response = await this.http.post('Mensagem', dados);
+    return response;
   }
 }
