@@ -78,17 +78,21 @@ export class ListingComponent {
       
       var object = await this.listingService.Add(formData)
       var fotosSalvar = [
-        this.fotos.length > 0 ? this.fotos[0][0] : null,
-        this.fotos.length > 1 ? this.fotos[1][0] : null,
-        this.fotos.length > 2 ? this.fotos[2][0] : null,
-        this.fotos.length > 3 ? this.fotos[3][0] : null,
+        this.fotos.length == 1 ? this.fotos[0] : null,
+        this.fotos.length == 2 ? this.fotos[1] : null,
+        this.fotos.length == 3 ? this.fotos[2] : null,
+        this.fotos.length == 4 ? this.fotos[3] : null,
         ]
       this.form.patchValue({anuncioId: object.result})
       var sequenciaFoto = 0
-      fotosSalvar.forEach(async foto => {  
-        sequenciaFoto++ 
-        if(foto != null)     
-          await this.salvarFotos(foto, sequenciaFoto)
+      fotosSalvar.forEach( foto => {  
+        if(foto != null){
+          foto.forEach(async p => {
+            sequenciaFoto++ 
+            await this.salvarFotos(p, sequenciaFoto)
+        })
+        }
+      
       });
     }
   }
@@ -103,6 +107,7 @@ export class ListingComponent {
   }
 
   public async salvarFotos(foto, sequenciaFoto){
+    console.log(foto)
     let formData = new FormData();
       let dados = {
         ...this.form.value,
@@ -117,4 +122,11 @@ export class ListingComponent {
       await this.listingService.AddFotos(formData)
   }
   
+  filesChange(evento){
+    this.fotos.push(evento)
+
+    // for (let i = 0; i < Math.min(this.form.value.fotos.length, 4); i++) {
+    //   this.fotos.push(this.form.value.fotos[i]);
+    // }
+  }
 }

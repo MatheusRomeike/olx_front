@@ -15,6 +15,7 @@ export class SaleComponent implements OnInit {
  fotos = [];
  slideConfig = {"slidesToShow": 4, "slidesToScroll": 4};
  file
+ slides  = []
 
  constructor(   
      private listingService: ListingService,
@@ -28,7 +29,6 @@ export class SaleComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
-    console.log(this.id)
     this.loadById(this.id)
   }
   
@@ -37,18 +37,20 @@ export class SaleComponent implements OnInit {
     this.objeto = await this.listingService.LoadById(this.id)
     this.fotos = []
     for (let i = 0; i < Math.min( this.objeto.fotos.length, 4); i++) {
-      this.fotos.push(this.helperService.base64ToFile( this.objeto.fotos[i], `Foto ${i + 1}`));
+      var foto = this.helperService.base64ToFile( this.objeto.fotos[i], `Foto ${i + 1}`)
+      var url = URL.createObjectURL(foto)
+      console.log(url)
+      this.fotos.push(url);
     }
     
-  }
+    }
+    
+    enviarMensagem(){
+    }
 
-  enviarMensagem(){
-
-  }
-
-  getPreviewUrl(file: File): string {
-
-    return URL.createObjectURL(this.file);
+  getPreviewUrl(file): string {
+    console.log(file)
+    return URL.createObjectURL(file);
   }
 
 

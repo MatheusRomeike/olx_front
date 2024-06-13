@@ -32,8 +32,18 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
-            "scripts": [],
-            "allowedCommonJsDependencies": ["moment", "text-mask-core"]
+            "scripts": [
+              "./node_modules/hammerjs/hammer.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "moment",
+              "text-mask-core"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            }
           },
           "configurations": {
             "production": {
@@ -96,7 +106,14 @@
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/slick-carousel/slick/slick.min.js"]
+              "node_modules/slick-carousel/slick/slick.min.js",
+              "./node_modules/hammerjs/hammer.min.js"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            }
           }
         }
       }

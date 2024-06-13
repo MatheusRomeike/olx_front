@@ -14,6 +14,7 @@ import { InputSelectOptionComponent } from './component/input-select-option/inpu
 import { InputTextComponent } from './component/input-text/input-text.component';
 import { LoadingComponent } from './component/loading/loading.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { IgxCarouselModule, IgxSliderModule } from 'igniteui-angular';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     RouterModule,
     NgbModule,
     ToastNoAnimationModule.forRoot(),
+    IgxSliderModule,
+    IgxCarouselModule
   ],
 })
 export class SharedModule {}
