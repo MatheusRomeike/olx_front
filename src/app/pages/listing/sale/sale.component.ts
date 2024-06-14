@@ -51,6 +51,7 @@ export class SaleComponent implements OnInit {
         for (let i = 0; i < Math.min( this.objeto.fotos.length, 4); i++) {
           var foto = this.helperService.base64ToFile( this.objeto.fotos[i], `Foto ${i + 1}`)
           var url = URL.createObjectURL(foto)
+          // var url = this.objeto.fotos[i];
           console.log(url)
           this.fotos.push(url);
         }
