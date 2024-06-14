@@ -1,0 +1,25 @@
+<div class="col-12">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th *ngFor="let column of captions">{{ column }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of paginatedData">
+        <td *ngFor="let column of columns">
+          {{ options[column] ? options[column][item[column]] : item[column] }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">
+      Anterior
+    </button>
+    <span>Página {{ currentPage }} de {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">
+      Próxima
+    </button>
+  </div>
+</div>
