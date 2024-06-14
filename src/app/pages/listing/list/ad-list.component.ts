@@ -103,4 +103,10 @@ export class AdListComponent implements OnInit {
     const sortParams = { ...currentParams, sortBy, sortDirection: this.sortDirection };
     this.applyFilters(sortParams);
   }
+
+  toggleFavorite(ad): void {
+    ad.interesse = !ad.interesse; // Alterna o estado de favorito do anúncio
+    this.listingService.toggleInteresse(ad.id)
+    // Aqui você pode adicionar lógica adicional, por exemplo, salvar o estado de favorito no backend
+  }
 }
