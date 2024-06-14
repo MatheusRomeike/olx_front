@@ -1,0 +1,35 @@
+.container {
+  margin-top: 20px;
+
+  .card-link {
+      display: block;
+      /* Garante que o link ocupe toda a área do card */
+      color: inherit;
+      /* Mantém a cor do texto padrão */
+      text-decoration: none;
+      /* Remove sublinhado padrão do link */
+  
+      /* Estilos de transição para suavizar a mudança de cor */
+      transition: color 0.3s ease-in-out;
+  
+      /* Estilos de hover para mudar a cor do texto ao passar o mouse */
+      &:hover {
+        color: #007bff;
+        /* Cor azul padrão do Bootstrap para links */
+      }
+    }
+    
+
+  .card {
+    img {
+      max-height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+}

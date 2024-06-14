@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ListingService } from './services/listing.service';
+import { ListingService } from '../services/listing.service';
 import { ActivatedRoute } from '@angular/router';
 import { HelperService } from 'src/app/shared/services/helper.service';
 import { Loading } from 'src/app/shared/decorators/loading.decorator';
@@ -95,6 +95,7 @@ export class ListingComponent {
     }
   }
   
+
   @Loading(
     null,
     true
@@ -102,9 +103,10 @@ export class ListingComponent {
   public async loadById(id){
     var objeto = await this.listingService.LoadById(id, 0)
     this.fotos = []
-    for (let i = 0; i < Math.min(objeto.fotos.length, 4); i++) {
-      this.fotos.push(this.helperService.base64ToFile(objeto.fotos[i], `Foto ${i + 1}`));
-    }
+    if(this.fotos.length)
+      for (let i = 0; i < Math.min(objeto.fotos.length, 4); i++) {
+        this.fotos.push(this.helperService.base64ToFile(objeto.fotos[i], `Foto ${i + 1}`));
+      }
     this.form.patchValue(objeto);
   }
 

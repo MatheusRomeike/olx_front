@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { ToastNoAnimationModule } from 'ngx-toastr';
 import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
 import { IconComponent } from './component/icon/icon.component';
@@ -15,6 +16,7 @@ import { InputTextComponent } from './component/input-text/input-text.component'
 import { LoadingComponent } from './component/loading/loading.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { IgxCarouselModule, IgxSliderModule } from 'igniteui-angular';
+import { PaginatedGridComponent } from './component/paginated-grid/paginated-grid.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { IgxCarouselModule, IgxSliderModule } from 'igniteui-angular';
     LoadingComponent,
     ConfirmationDialogComponent,
     InputFileComponent,
+    PaginatedGridComponent,
   ],
   exports: [
     IconComponent,
@@ -40,6 +43,8 @@ import { IgxCarouselModule, IgxSliderModule } from 'igniteui-angular';
     ToastNoAnimationModule,
     ConfirmationDialogComponent,
     InputFileComponent,
+    NgApexchartsModule,
+    PaginatedGridComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +56,7 @@ import { IgxCarouselModule, IgxSliderModule } from 'igniteui-angular';
     ToastNoAnimationModule.forRoot(),
     IgxSliderModule,
     IgxCarouselModule
+    NgApexchartsModule,
   ],
 })
 export class SharedModule {}

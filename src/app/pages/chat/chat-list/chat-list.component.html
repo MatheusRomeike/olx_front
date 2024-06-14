@@ -1,0 +1,23 @@
+<h1>Minhas Conversas</h1>
+<div class="conversas-container">
+  <div *ngFor="let conversa of conversas" class="conversa-item">
+    <a
+      [routerLink]="['/chat', conversa.anuncioId, conversa.usuarioId]"
+      class="conversa-link"
+    >
+      <img
+        [src]="conversa.fotoAnuncio"
+        alt="Foto do Anúncio"
+        class="foto-anuncio"
+      />
+      <div class="conversa-info">
+        <h3>{{ conversa.tituloAnuncio }}</h3>
+        <p>
+          <strong>{{ conversa.autorMensagem }}:</strong>
+          {{ conversa.texto }}
+        </p>
+        <p class="horario">{{ conversa.dataCriacao | date : "short" }}</p>
+      </div>
+    </a>
+  </div>
+</div>
