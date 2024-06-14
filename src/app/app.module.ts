@@ -12,12 +12,13 @@ import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from './shared/providers/ngb-date-parser-formatter';
+import { ChatModule } from './pages/chat/chat.module';
 
 registerLocaleData(localePt);
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, CoreModule],
+  imports: [BrowserModule, AppRoutingModule, SharedModule, CoreModule, ChatModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

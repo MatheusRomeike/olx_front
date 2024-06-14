@@ -6,24 +6,21 @@ export const navbarData: INavbarData[] = [
     icon: 'dashboard',
     label: 'Dashboard',
   },
+
   {
-    routeLink: 'accounts',
-    icon: 'account_tree',
-    label: 'Accounts',
-    items: [
-      {
-        routeLink: 'accounts/manage',
-        label: 'Manage',
-      },
-      {
-        routeLink: 'accounts/publish',
-        label: 'Publish',
-      },
-      {
-        routeLink: 'accounts/logs',
-        label: 'Logs',
-      },
-    ],
+    routeLink: 'anuncio',
+    icon: 'add',
+    label: 'Anunciar',
+  },
+  {
+    routeLink: 'anuncio/lista',
+    icon: 'list',
+    label: 'Anúncios',
+  },
+  {
+    routeLink: 'chat',
+    icon: 'chat',
+    label: 'Conversas',
   },
   {
     routeLink: 'configuracoes',

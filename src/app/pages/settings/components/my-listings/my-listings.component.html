@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12" *ngFor="let item of itens">
+      <a routerLink="/anuncio/compra/{{item.anuncioId}}" class="card-link">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <h5>{{ item.titulo }}</h5>
+              </div>
+              <div class="col-auto">
+                <app-icon>delete</app-icon>
+                <span>Inativar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

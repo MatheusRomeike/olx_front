@@ -16,4 +16,9 @@ export class ProfileService {
     const response = await this.http.patch('usuario', dados);
     return response;
   }
+
+  public async LoadByUsuario(): Promise<any> {
+    const response = await this.http.get('anuncio/LoadByUsuario');
+    return response;
+  }
 }

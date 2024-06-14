@@ -1,0 +1,48 @@
+<div class="container">
+  <header class="my-4">
+    <h1>Listagem de Anúncios</h1>
+    <div class="input-group mb-3">
+      <span class="input-group-text">Ordenar por:</span>
+      <button class="btn btn-outline-secondary sort-btn" (click)="sortByTitle()">
+        Título
+        <i class="material-icons">
+          {{ currentSortBy === 'title' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : '' }}
+        </i>
+      </button>
+      <button class="btn btn-outline-secondary sort-btn" (click)="sortByPrice()">
+        Preço
+        <i class="material-icons">
+          {{ currentSortBy === 'price' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : '' }}
+        </i>
+      </button>
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text">Filtrar por categoria:</span>
+      <select class="form-select" (change)="filterByCategory($event)">
+        <option value="Todos">Todos</option>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text">Filtrar por faixa de preço:</span>
+      <input type="number" class="form-control" placeholder="Preço mínimo" #minPrice>
+      <input type="number" class="form-control" placeholder="Preço máximo" #maxPrice>
+      <button class="btn btn-primary" type="button"
+        (click)="filterByPriceRange(minPrice.value, maxPrice.value)">Filtrar</button>
+    </div>
+  </header>
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let ad of filteredAds">
+      <a [routerLink]="'/anuncio/' + ad.anuncioId" class="card-link">
+        <div class="card">
+          <img [src]="ad.fotos[0]" class="card-img-top" alt="{{ ad.titulo }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ ad.titulo }}</h5>
+            <p class="card-text">Categoria: {{ ad.descricao }}</p>
+            <p class="card-text">Preço: R$ {{ ad.preco }}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

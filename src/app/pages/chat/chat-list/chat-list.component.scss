@@ -1,0 +1,89 @@
+.conversas-container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 80vh; /* Limitar a altura máxima do container */
+  overflow-y: auto; /* Adicionar rolagem vertical */
+}
+
+.conversa-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+}
+
+.conversa-item:last-child {
+  border-bottom: none;
+}
+
+.conversa-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+}
+
+.foto-anuncio {
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  margin-right: 15px;
+  object-fit: cover;
+}
+
+.conversa-info {
+  flex: 1;
+}
+
+.conversa-info h3 {
+  margin: 0 0 5px;
+  font-size: 18px;
+  color: #333;
+}
+
+.conversa-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.horario {
+  font-size: 12px;
+  color: #999;
+  text-align: right;
+  margin-top: 5px;
+}
+
+/* Media queries para responsividade */
+@media (max-width: 600px) {
+  .conversas-container {
+    padding: 10px;
+  }
+
+  .conversa-item {
+    padding: 10px 0;
+  }
+
+  .foto-anuncio {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+
+  .conversa-info h3 {
+    font-size: 16px;
+  }
+
+  .conversa-info p {
+    font-size: 12px;
+  }
+
+  .horario {
+    font-size: 10px;
+  }
+}

@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ToastNoAnimationModule } from 'ngx-toastr';
 import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
 import { IconComponent } from './component/icon/icon.component';
@@ -46,6 +47,7 @@ import { PaginatedGridComponent } from './component/paginated-grid/paginated-gri
   ],
   imports: [
     CommonModule,
+    SlickCarouselModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
