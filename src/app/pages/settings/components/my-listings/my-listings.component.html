@@ -1,14 +1,14 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12" *ngFor="let item of itens">
-      <a routerLink="/anuncio/compra/{{item.anuncioId}}" class="card-link">
+      <a  >
         <div class="card mb-4">
           <div class="card-body">
             <div class="row">
-              <div class="col">
+              <div class=" col card-link" routerLink="/anuncio/{{item.anuncioId}}">
                 <h5>{{ item.titulo }}</h5>
               </div>
-              <div class="col-auto">
+              <div class="col-auto card-link" (click)="desativar(item.anuncioId)">
                 <app-icon>delete</app-icon>
                 <span>Inativar</span>
               </div>

@@ -1,11 +1,13 @@
+<h3 class="text-left my-3">
+Anunciar</h3>
 <div class="card">
   <div class="card-body">
     <div class="d-flex justify-content-center">
       <form [formGroup]="form" class="row">
         <div class="d-flex justify-content-center mt-3">
-          <h2 class="text-left mt-3">
+          <h4 class="text-left mt-3">
             Agora informe algumas características do seu produto
-          </h2>
+          </h4>
         </div>
 
         <div class="d-flex justify-content-center mt-3">
@@ -25,7 +27,7 @@
             [id]="'fotoPerfil'"
             [label]="'Fotos do item'"
             [files]="fotos"
-            (filesChange)="fotos.push($event)"
+            (filesChange)="filesChange($event)"
           ></div>
         </div>
         <div class="d-flex justify-content-center mt-3">
@@ -43,9 +45,11 @@
           <div
             class="mt-3"
             input-select-option
-            [formControlName]="'categoria'"
+            [formControlName]="'categoriaId'"
             [label]="'Categoria'"
             [id]="'categoria'"
+            [bindLabel]="'descricao'"
+            [bindValue]="'id'"
             [items]="categorias"
             [placeholder]="'Informe a categoria...'"
             [columnSize]="8"
@@ -60,7 +64,9 @@
             [label]="'Preço'"
             [id]="'preco'"
             [type]="'number'"
-          ></div>
+            [icon]="'dollar'"
+            [iconPosition]="'left'"
+          ></div>         
         </div>
 
         <div class="d-flex justify-content-center">
