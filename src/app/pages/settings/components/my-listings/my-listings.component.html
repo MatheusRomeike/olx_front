@@ -1,16 +1,27 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12" *ngFor="let item of itens">
-      <a  >
+      <a>
         <div class="card mb-4">
           <div class="card-body">
             <div class="row">
-              <div class=" col card-link" routerLink="/anuncio/{{item.anuncioId}}">
-                <h5>{{ item.titulo }}</h5>
+              <div
+                class="col card-link"
+                routerLink="/anuncio/{{ item.anuncioId }}"
+              >
+                <h5>{{ item.titulo }} [{{ item.estadoAnuncio }}]</h5>
+                <p>{{ item.descricao }}</p>
               </div>
-              <div class="col-auto card-link" (click)="desativar(item.anuncioId)">
+              <div
+                class="col-auto card-link"
+                (click)="desativar(item.anuncioId)"
+              >
                 <app-icon>delete</app-icon>
                 <span>Inativar</span>
+              </div>
+              <div class="col-auto card-link" (click)="vender(item.anuncioId)">
+                <app-icon>sell</app-icon>
+                <span>Vender</span>
               </div>
             </div>
           </div>
