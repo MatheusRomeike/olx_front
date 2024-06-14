@@ -33,4 +33,9 @@ export class ListingService {
     const response = await this.http.get(url);
     return response;
   }
+
+  public async Desativar(id){
+    const response = await this.http.delete('anuncio/Delete?anuncioId='+ id);
+    return response;
+  }
 }
