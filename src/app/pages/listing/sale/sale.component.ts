@@ -63,15 +63,24 @@ export class SaleComponent implements OnInit {
       }
     }
     
-    enviarMensagem(){
-      var usuarioId = localStorage.getItem(this.usuarioLocalStorage);
-      this.router.navigate([`/chat/${this.id}/${usuarioId}`]);
-    }
+  enviarMensagem(){
+    var usuarioId = localStorage.getItem(this.usuarioLocalStorage);
+    this.router.navigate([`/chat/${this.id}/${usuarioId}`]);
+  }
 
-    getPreviewUrl(file): string {
-      console.log(file)
-      return URL.createObjectURL(file);
-    }
+  getPreviewUrl(file): string {
+    console.log(file)
+    return URL.createObjectURL(file);
+  }
+  
 
+  toggleFavorite(ad): void {
+    const text = !ad.interesse ? "Anuncio favoritado com sucesso!" : "Anuncio desfavoritado com sucesso!" 
+    ad.interesse = !ad.interesse; // Alterna o estado de favorito do anúncio
+    console.log(ad);
+    
+    this.listingService.toggleInteresse(ad.anuncioId)
 
+    this.toastrService.success(text)
+  }
 }

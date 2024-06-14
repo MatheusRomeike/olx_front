@@ -22,6 +22,15 @@
           <h4>{{ objeto?.titulo }}</h4>
 
           <p class="pt-0 mt-3">{{ objeto?.descricao }}</p>
+
+          <button class="btn btn-link" (click)="toggleFavorite(objeto)">
+            <!-- <i class="material-icons">{{ objeto.interesse ? 'favorite' : 'favorite_border' }}</i> -->
+            <i 
+              class="material-icons favorite-icon" 
+            >
+              {{ objeto?.interesse ? 'favorite' : 'favorite_border' }}
+            </i>
+          </button>
         </div>
       </div>
       <div class="col-md-4 mb-4">

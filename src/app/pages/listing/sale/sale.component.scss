@@ -92,4 +92,17 @@
         max-width: 90%;
     }
 }
+
+// CSS para o ícone de coração quando favorito
+.favorite-icon {
+  color: #6e0ad6; // Cor roxa
+  font-size: 50px;
+}
+
+// CSS para o ícone de coração quando não favorito
+.favorite-border-icon {
+  color: #6e0ad6; // Cor padrão do ícone (preto, por exemplo)
+  font-size: 50px;
+}
+
   

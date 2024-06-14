@@ -42,7 +42,6 @@ export class ListingService {
     return response;
   }
 
-
   public async List(parametros?): Promise<any> {
     const { sortBy, sortDirection, category, minPrice, maxPrice } = parametros;
 
@@ -71,5 +70,9 @@ export class ListingService {
     return (await this.http.get(
       'anuncio/GetTituloAnuncio?anuncioId=' + anuncioId
     )) as string;
+  }
+
+  public async toggleInteresse(AnuncioId): Promise<any> {
+    return await this.http.post('interesse', { AnuncioId })
   }
 }

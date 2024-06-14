@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row mb-3">
+    <div class="col-auto">
+      <span class="bolinha vendido"></span>
+      <span class="pl-3">Vendido</span>
+    </div>
+    <div class="col-auto">
+      <span class="bolinha ativo"></span>
+      <span class="pl-3">Ativo</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" *ngFor="let item of itens">
+      <a>
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col"
+                [ngClass]="{'': item.estadoAnuncio === 'Vendido', 'card-link': item.estadoAnuncio === 'Ativo'}"
+                (click)="redirect(item)">
+                <h5>{{ item.titulo }}
+                  <span class="bolinha ml-3 pl-3"
+                    [ngClass]="{'vendido': item.estadoAnuncio === 'Vendido', 'ativo': item.estadoAnuncio === 'Ativo'}"></span>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

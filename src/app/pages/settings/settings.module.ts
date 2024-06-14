@@ -9,6 +9,7 @@ import { ProfileRootComponent } from './components/profile-root/profile-root.com
 import { ReportRootComponent } from './components/report-root/report-root.component';
 import { SettingsRootComponent } from './settings-root/settings-root.component';
 import { SettingsRoutingModule } from './settings-routing.module';
+import { MyInterestsComponent } from './components/my-interests/my-interests.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SettingsRoutingModule } from './settings-routing.module';
     ProfileRootComponent,
     MyListingsComponent,
     ReportRootComponent,
+    MyInterestsComponent,
   ],
   imports: [
     SettingsRoutingModule,
