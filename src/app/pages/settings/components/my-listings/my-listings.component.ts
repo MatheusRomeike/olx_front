@@ -45,8 +45,8 @@ export class MyListingsComponent implements OnInit {
 
   redirect(item){
     console.log(item)
-    if(item.estadoAnuncio != "Vendido"){
+    if(item.estadoAnuncio != "Vendido") {
       this.router.navigate([`/anuncio/${item.anuncioId}`])
-  }
+    }
   }
 }
