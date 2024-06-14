@@ -62,7 +62,33 @@ export class ListingComponent {
   public async salvar(){
     if(this.id > 0){
       this.form.value.anuncioId = this.id
-      this.listingService.Update(this.form.value)
+      let formData = new FormData();
+      let dados = {
+        ...this.form.value
+      };
+    
+      for (let key in dados) {
+        formData.append(key, dados[key]);
+      }
+      
+      var retorno = await this.listingService.Update(this.form.value)
+      var fotosSalvar = [
+        this.fotos.length == 1 ? this.fotos[0] : null,
+        this.fotos.length == 2 ? this.fotos[1] : null,
+        this.fotos.length == 3 ? this.fotos[2] : null,
+        this.fotos.length == 4 ? this.fotos[3] : null,
+        ]
+      this.form.patchValue({anuncioId: this.id})
+      var sequenciaFoto = 0
+      fotosSalvar.forEach( foto => {  
+        if(foto != null){
+          foto.forEach(async p => {
+            sequenciaFoto++ 
+            await this.salvarFotos(p, sequenciaFoto)
+        })
+        }
+      
+      });
     }
     else{
       let formData = new FormData();
@@ -103,16 +129,23 @@ export class ListingComponent {
   public async loadById(id){
     var objeto = await this.listingService.LoadById(id, 0)
     this.fotos = []
-    if(this.fotos.length)
+    console.log(this.fotos)
+    if(objeto.fotos.length)
       for (let i = 0; i < Math.min(objeto.fotos.length, 4); i++) {
         this.fotos.push(this.helperService.base64ToFile(objeto.fotos[i], `Foto ${i + 1}`));
       }
     this.form.patchValue(objeto);
   }
 
-
+  @Loading(
+    {
+      Sucesso: new ToastrMessages({
+        Titulo: 'Foto salva com sucesso!',
+      }),
+    },
+    true
+  )
   public async salvarFotos(foto, sequenciaFoto){
-    console.log(foto)
     let formData = new FormData();
       let dados = {
         ...this.form.value,
@@ -124,10 +157,14 @@ export class ListingComponent {
         formData.append(key, dados[key]);
       }
       
-      await this.listingService.AddFotos(formData)
+      await this.listingService.AddFotos(formData).then();
   }
   
   filesChange(evento){
     this.fotos.push(evento)
+  }
+
+  remove(evento){
+    console.log(evento)
   }
 }
