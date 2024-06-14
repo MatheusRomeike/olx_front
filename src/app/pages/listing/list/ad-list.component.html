@@ -36,10 +36,9 @@
     </div>
     <div class="input-group mb-3">
       <span class="input-group-text">Filtrar por categoria:</span>
-      <select class="form-select" (change)="filterByCategory($event)">
-        <option value="Todos">Todos</option>
-        <option *ngFor="let category of categories" [value]="category">
-          {{ category }}
+      <select class="form-select" [(ngModel)]="selectedCategory" (change)="filterByCategory($event)">
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.descricao }}
         </option>
       </select>
     </div>
@@ -76,7 +75,9 @@
         <div class="card">
           <img [src]="ad.fotos[0]" class="card-img-top" alt="{{ ad?.titulo }}" />
           <div class="card-body">
-            <h5 class="card-text">R$ {{ ad?.preco.toFixed(2)  }}        <span class="label-descricao col-3 text-center px-0">{{ ad?.descricaoCategoria }}</span> 
+            <h5 class="card-text">
+              R$ {{ ad?.preco.toFixed(2)  }}        
+              <span class="label-descricao col-3 text-center px-0">{{ ad?.descricaoCategoria }}</span> 
             </h5>
             <span class="card-title">{{ ad?.titulo }}  </span>
             <div class="col-auto label-location mt-3" >

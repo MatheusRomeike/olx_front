@@ -42,16 +42,8 @@ export class ListingService {
     return response;
   }
 
-  // {
-  //   "sortBy": "title",
-  //   "sortDirection": "asc",
-  //   "category": "edrfcrfcfrcrfccf",
-  //   "minPrice": "1000",
-  //   "maxPrice": "2000"
-  // }
 
   public async List(parametros?): Promise<any> {
-    // console.log(parametros);
     const { sortBy, sortDirection, category, minPrice, maxPrice } = parametros;
 
     let url = 'anuncio/List?';
@@ -68,8 +60,8 @@ export class ListingService {
 
     if (minPrice) url += `PrecoMin=${minPrice}&`;
     if (maxPrice) url += `PrecoMax=${maxPrice}&`;
+    if(category && category !== 'Todos') url += `CategoriaId=${category}&`
 
-    console.log(url);
 
     const response = await this.http.get(url);
     return response;
