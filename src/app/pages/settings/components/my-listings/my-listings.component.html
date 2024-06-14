@@ -1,27 +1,32 @@
 <div class="container">
+  <div class="row mb-3">
+    <div class="col-auto">
+      <span class="bolinha vendido"></span>
+      <span class="pl-3">Vendido</span>
+    </div>
+    <div class="col-auto">
+      <span class="bolinha ativo"></span>
+      <span class="pl-3">Ativo</span>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-12" *ngFor="let item of itens">
       <a>
         <div class="card mb-4">
           <div class="card-body">
             <div class="row">
-              <div
-                class="col card-link"
-                routerLink="/anuncio/{{ item.anuncioId }}"
-              >
-                <h5>{{ item.titulo }} [{{ item.estadoAnuncio }}]</h5>
-                <p>{{ item.descricao }}</p>
+              <div class="col card-link" routerLink="/anuncio/{{ item.anuncioId }}">
+                <h5>{{ item.titulo }}
+                  <span class="bolinha ml-3 pl-3" [ngClass]="{'vendido': item.estadoAnuncio === 'Vendido', 'ativo': item.estadoAnuncio === 'Ativo'}"></span>
+                </h5>
               </div>
-              <div
-                class="col-auto card-link"
-                (click)="desativar(item.anuncioId)"
-              >
-                <app-icon>delete</app-icon>
-                <span>Inativar</span>
+              <div class="col-auto" (click)="alterarStatus(item, estadoDesativado)">
+                <app-icon style="color: #6e0ad6;" class="card-link">delete</app-icon>
+                <span class="card-link">Inativar</span>
               </div>
-              <div class="col-auto card-link" (click)="vender(item.anuncioId)">
-                <app-icon>sell</app-icon>
-                <span>Vender</span>
+              <div class="col-auto" (click)="alterarStatus(item, estadoVendido)">
+                <app-icon style="color: #6e0ad6;" class="card-link">sell</app-icon>
+                <span class="card-link">Vender</span>
               </div>
             </div>
           </div>

@@ -1,3 +1,24 @@
 .card-link{
     cursor: pointer;
 }
+.label-descricao{
+    color: #ffffff; 
+    // background-color: #e5e2e7; 
+    border-radius: 10%; 
+    font-size: 15px;
+  }
+
+  .vendido {
+    background-color: #e68c33; /* Laranja pastel */
+  }
+  
+  .ativo {
+    background-color: #54a354; /* Verde pastel */
+  }
+
+  .bolinha {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    border-radius: 50%;
+  }

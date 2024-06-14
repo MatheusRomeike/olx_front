@@ -60,6 +60,7 @@
       <button
         class="btn btn-primary"
         type="button"
+        style="background-color: #6e0ad6; border-color: #6e0ad6;"
         (click)="filterByPriceRange(minPrice.value, maxPrice.value)"
       >
         Filtrar
@@ -69,15 +70,21 @@
   <div class="row">
     <div class="col-md-4 mb-3" *ngFor="let ad of filteredAds">
       <a
-        [routerLink]="'/anuncio/' + ad.anuncioId + '/' + ad.usuarioId"
+        [routerLink]="'/anuncio/' + ad?.anuncioId + '/' + ad?.usuarioId"
         class="card-link"
       >
         <div class="card">
-          <img [src]="ad.fotos[0]" class="card-img-top" alt="{{ ad.titulo }}" />
+          <img [src]="ad.fotos[0]" class="card-img-top" alt="{{ ad?.titulo }}" />
           <div class="card-body">
-            <h5 class="card-title">{{ ad.titulo }}</h5>
-            <p class="card-text">Categoria: {{ ad.descricao }}</p>
-            <p class="card-text">Preço: R$ {{ ad.preco }}</p>
+            <h5 class="card-text">R$ {{ ad?.preco.toFixed(2)  }}        <span class="label-descricao col-3 text-center px-0">{{ ad?.descricaoCategoria }}</span> 
+            </h5>
+            <span class="card-title">{{ ad?.titulo }}  </span>
+            <div class="col-auto label-location mt-3" >
+              <app-icon class="mt-3" style=" font-size: 16px;">location_on</app-icon>
+              <span >{{ ad?.usuario.bairro }} - {{ ad?.usuario.cidade }}</span>
+            </div>
+
+
           </div>
         </div>
       </a>
