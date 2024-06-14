@@ -17,25 +17,28 @@ export class ListingService {
     return response;
   }
 
-  public async Update(dados){
+  public async Update(dados) {
     const response = await this.http.patch('anuncio/Update', dados);
     return response;
   }
 
   public async LoadById(id, usuarioId): Promise<any> {
-    var url ='anuncio/LoadById?anuncioId='+ id + '&usuarioId=' + usuarioId
+    var url = 'anuncio/LoadById?anuncioId=' + id + '&usuarioId=' + usuarioId;
     const response = await this.http.get(url);
     return response;
   }
 
   public async LoadCategorias(): Promise<any> {
-    var url ='anuncio/LoadCategorias'
+    var url = 'anuncio/LoadCategorias';
     const response = await this.http.get(url);
     return response;
   }
 
-  public async Desativar(id){
-    const response = await this.http.delete('anuncio/Delete?anuncioId='+ id);
+  public async AlterarStatus(id, status) {
+    const response = await this.http.patch('anuncio/AlterarStatus', {
+      anuncioId: id,
+      estado: status,
+    });
     return response;
   }
 

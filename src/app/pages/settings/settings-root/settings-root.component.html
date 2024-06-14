@@ -6,7 +6,7 @@
         #nav="ngbNav"
         class="nav d-flex d-md-block justify-content-center flex-sm-column"
       >
-        <li [ngbNavItem]="1">
+        <li [ngbNavItem]="1" [destroyOnHide]="true">
           <a ngbNavLink> <app-icon>assignment</app-icon> Meu Cadastro</a>
           <ng-template ngbNavContent>
             <app-profile-root></app-profile-root>
@@ -23,7 +23,6 @@
           <ng-template ngbNavContent>
             <app-my-listings></app-my-listings>
           </ng-template>
-
         </li>
       </ul>
     </div>

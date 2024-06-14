@@ -56,9 +56,9 @@ export class ReportRootComponent {
   tableCaptions = ['Título', 'Status'];
   tableOptions = {
     estadoAnuncio: {
-      1: 'Ativo',
-      2: 'Inativo',
-      3: 'Vendido',
+      Ativo: 'Ativo',
+      Inativo: 'Inativo',
+      Vendido: 'Vendido',
     },
   };
   filtro: number = null;
@@ -77,13 +77,16 @@ export class ReportRootComponent {
       dataInicial: [dataInicial, Validators.required],
       dataFinal: [today, Validators.required],
     });
-    this.buscarRelatorio();
 
     this.form.valueChanges.subscribe((value) => {
       if (this.form.valid) {
         this.buscarRelatorio();
       }
     });
+
+    setTimeout(() => {
+      this.buscarRelatorio();
+    }, 500);
   }
 
   @Loading()
@@ -106,9 +109,9 @@ export class ReportRootComponent {
     this.filteredTableData = this.tableData;
     this.totalizadores = this.tableData.reduce(
       (acc, item) => {
-        acc[0] += item.estadoAnuncio === 1 ? 1 : 0;
-        acc[1] += item.estadoAnuncio === 2 ? 1 : 0;
-        acc[2] += item.estadoAnuncio === 3 ? 1 : 0;
+        acc[0] += item.estadoAnuncio === 'Ativo' ? 1 : 0;
+        acc[1] += item.estadoAnuncio === 'Inativo' ? 1 : 0;
+        acc[2] += item.estadoAnuncio === 'Vendido' ? 1 : 0;
         return acc;
       },
       [0, 0, 0]
