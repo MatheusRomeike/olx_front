@@ -129,7 +129,7 @@ export class ListingComponent {
         formData.append(key, dados[key]);
       }
       
-      var object = await this.listingService.Add(formData)
+      var object = await this.listingService.Add(dados)
       this.form.patchValue({anuncioId: object.result})
       var sequenciaFoto = 0
       var fotosSalvar = [
