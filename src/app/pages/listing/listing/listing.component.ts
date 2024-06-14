@@ -161,7 +161,6 @@ export class ListingComponent {
   }
   
   filesChange(evento){
-    console.log(evento)
     this.fotos.push(evento)
   }
 

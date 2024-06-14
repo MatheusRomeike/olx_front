@@ -29,11 +29,7 @@ export class MyListingsComponent implements OnInit {
   }
 
   @Loading(
-    {
-      Sucesso: new ToastrMessages({
-        Titulo: 'Estado do anúncio alterado com sucesso!',
-      }),
-    },
+    null,
     true
   )
   public async alterarStatus(item, estado){
@@ -42,6 +38,7 @@ export class MyListingsComponent implements OnInit {
       return
     }
     await this.listingService.AlterarStatus(item.anuncioId, estado).then();
+    this.toastrService.success('Anúncio vendido com sucesso.')
     this.obterItens()
   }
 }
