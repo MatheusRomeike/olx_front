@@ -19,6 +19,7 @@ export class SaleComponent implements OnInit {
  file
  slides  = []
  usuarioId
+ usuarioLocalStorage: string = 'usuarioId';
 
  constructor(   
      private listingService: ListingService,
@@ -55,7 +56,7 @@ export class SaleComponent implements OnInit {
           this.fotos.push(url);
         }
       }
-      catch(e){
+      catch(e){ 
         // this.router.navigate(['/'])
         this.toastrService.error('Anúncio não encontrado.')
         console.error(e)
@@ -63,12 +64,14 @@ export class SaleComponent implements OnInit {
     }
     
     enviarMensagem(){
+      var usuarioId = localStorage.getItem(this.usuarioLocalStorage);
+      this.router.navigate([`/chat/${this.id}/${usuarioId}`]);
     }
 
-  getPreviewUrl(file): string {
-    console.log(file)
-    return URL.createObjectURL(file);
-  }
+    getPreviewUrl(file): string {
+      console.log(file)
+      return URL.createObjectURL(file);
+    }
 
 
 }
