@@ -15,7 +15,7 @@
         <div class="card mb-4">
           <div class="card-body">
             <div class="row">
-              <div class="col card-link" routerLink="/anuncio/{{ item.anuncioId }}">
+              <div class="col" [ngClass]="{'': item.estadoAnuncio === 'Vendido', 'card-link': item.estadoAnuncio === 'Ativo'}"  (click)="redirect(item)">
                 <h5>{{ item.titulo }}
                   <span class="bolinha ml-3 pl-3" [ngClass]="{'vendido': item.estadoAnuncio === 'Vendido', 'ativo': item.estadoAnuncio === 'Ativo'}"></span>
                 </h5>

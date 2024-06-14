@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ListingService } from '../services/listing.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HelperService } from 'src/app/shared/services/helper.service';
 import { Loading } from 'src/app/shared/decorators/loading.decorator';
 import { ToastrMessages } from 'src/app/shared/models/toastr-messages';
@@ -16,10 +16,13 @@ export class ListingComponent {
   fotos: Array<any> = new Array<any>(); // Adicionei essa variável para armazenar as fotos que o usuário selecionar, e depois enviar junto com o formulário
   id
   categorias
+  imagemInserida = false
+  usuarioLocalStorage: string = 'usuarioId';
   constructor(   
      private listingService: ListingService,
      private route: ActivatedRoute,
-     private helperService: HelperService
+     private helperService: HelperService,
+     private router: Router
   ) { }
 
 
@@ -72,23 +75,49 @@ export class ListingComponent {
       }
       
       var retorno = await this.listingService.Update(this.form.value)
-      var fotosSalvar = [
-        this.fotos.length == 1 ? this.fotos[0] : null,
-        this.fotos.length == 2 ? this.fotos[1] : null,
-        this.fotos.length == 3 ? this.fotos[2] : null,
-        this.fotos.length == 4 ? this.fotos[3] : null,
-        ]
+
       this.form.patchValue({anuncioId: this.id})
       var sequenciaFoto = 0
-      fotosSalvar.forEach( foto => {  
-        if(foto != null){
-          foto.forEach(async p => {
-            sequenciaFoto++ 
-            await this.salvarFotos(p, sequenciaFoto)
-        })
-        }
+
+      if(this.imagemInserida){
+        var fotosSalvar = [
+          this.fotos.length == 1 ? this.fotos[0] : null,
+          this.fotos.length == 2 ? this.fotos[1] : null,
+          this.fotos.length == 3 ? this.fotos[2] : null,
+          this.fotos.length == 4 ? this.fotos[3] : null,
+          ]
+          let promessas = fotosSalvar
+          .filter(foto => foto != null)
+          .map(async (fotoArray, index) => {
+            for (let p of fotoArray) {
+              sequenciaFoto++;
+              await this.salvarFotos(p, sequenciaFoto);
+            }
+          });
       
-      });
+        await Promise.all(promessas);
+        var usuarioId = localStorage.getItem(this.usuarioLocalStorage);
+        this.router.navigate([`/anuncio/${this.id}/${usuarioId}`]);
+      }
+      else{
+        var fotosSalvar = [
+          this.fotos.length >= 1 ? this.fotos[0] : null,
+          this.fotos.length >= 2 ? this.fotos[1] : null,
+          this.fotos.length >= 3 ? this.fotos[2] : null,
+          this.fotos.length >= 4 ? this.fotos[3] : null,
+          ]
+          let promessas = fotosSalvar
+          .filter(foto => foto != null)
+          .map(async (foto, index) => {
+            sequenciaFoto++;
+            await this.salvarFotos(foto, sequenciaFoto);
+          });
+      
+        await Promise.all(promessas);
+        var usuarioId = localStorage.getItem(this.usuarioLocalStorage);
+        this.router.navigate([`/anuncio/${this.id}/${usuarioId}`]);
+      }
+     
     }
     else{
       let formData = new FormData();
@@ -101,23 +130,26 @@ export class ListingComponent {
       }
       
       var object = await this.listingService.Add(formData)
+      this.form.patchValue({anuncioId: object.result})
+      var sequenciaFoto = 0
       var fotosSalvar = [
         this.fotos.length == 1 ? this.fotos[0] : null,
         this.fotos.length == 2 ? this.fotos[1] : null,
         this.fotos.length == 3 ? this.fotos[2] : null,
         this.fotos.length == 4 ? this.fotos[3] : null,
         ]
-      this.form.patchValue({anuncioId: object.result})
-      var sequenciaFoto = 0
-      fotosSalvar.forEach( foto => {  
-        if(foto != null){
-          foto.forEach(async p => {
-            sequenciaFoto++ 
-            await this.salvarFotos(p, sequenciaFoto)
-        })
+      let promessas = fotosSalvar
+      .filter(foto => foto != null)
+      .map(async (fotoArray, index) => {
+        for (let p of fotoArray) {
+          sequenciaFoto++;
+          await this.salvarFotos(p, sequenciaFoto);
         }
-      
       });
+  
+    await Promise.all(promessas);
+    var usuarioId = localStorage.getItem(this.usuarioLocalStorage);
+    this.router.navigate([`/anuncio/${object.result}/${usuarioId}`]);
     }
   }
   
@@ -129,7 +161,6 @@ export class ListingComponent {
   public async loadById(id){
     var objeto = await this.listingService.LoadById(id, 0)
     this.fotos = []
-    console.log(this.fotos)
     if(objeto.fotos.length)
       for (let i = 0; i < Math.min(objeto.fotos.length, 4); i++) {
         this.fotos.push(this.helperService.base64ToFile(objeto.fotos[i], `Foto ${i + 1}`));
@@ -161,10 +192,10 @@ export class ListingComponent {
   }
   
   filesChange(evento){
+    this.imagemInserida = true
     this.fotos.push(evento)
   }
 
   remove(evento){
-    console.log(evento)
   }
 }
