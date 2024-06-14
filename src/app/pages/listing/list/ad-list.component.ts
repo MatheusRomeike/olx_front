@@ -19,7 +19,8 @@ export class AdListComponent implements OnInit {
   ads = [];
 
   filteredAds = this.ads;
-  categories: string[];
+  categories = [{ id: "Todos", descricao: "Todos" }];
+  selectedCategory = "Todos"; 
   sortDirection: 'asc' | 'desc' = 'asc';
   currentSortBy: string = '';
 
@@ -29,17 +30,17 @@ export class AdListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private listingService: ListingService
+    private listingService: ListingService,
   ) { }
 
   async ngOnInit(): Promise<void> {
     this.route.queryParams.subscribe(async params => {
-      console.log(params);
       if (params?.['sortBy']) this.currentSortBy = params['sortBy']
       if (params?.['sortDirection']) this.sortDirection = params['sortDirection']
 
       await this.loadAds(params);
-      this.categories = this.getUniqueCategories();
+      const apiCategories = await this.listingService.LoadCategorias()
+      this.categories.push(...apiCategories);
     });
   }
 
@@ -47,6 +48,7 @@ export class AdListComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params?.['minPrice']) this.minPriceInput.nativeElement.value = params['minPrice'];
       if (params?.['maxPrice']) this.maxPriceInput.nativeElement.value = params['maxPrice'];
+      if (params?.['category']) this.selectedCategory = params?.['category']
     });
   }
 
@@ -64,16 +66,12 @@ export class AdListComponent implements OnInit {
     this.loadAds(filterParams);
   }
 
-  getUniqueCategories(): string[] {
-    const uniqueCategories = new Set<string>();
-    this.ads.forEach(ad => uniqueCategories.add(ad.descricao));
-    return Array.from(uniqueCategories);
-  }
 
   filterByCategory(event: Event): void {
     const category = (event.target as HTMLSelectElement).value;
+    this.selectedCategory = category;
     const currentParams = this.route.snapshot.queryParams;
-    this.applyFilters({ ...currentParams, category });
+    this.applyFilters({ ...currentParams, category: this.selectedCategory });
   }
 
   filterByPriceRange(minPrice: string, maxPrice: string): void {
