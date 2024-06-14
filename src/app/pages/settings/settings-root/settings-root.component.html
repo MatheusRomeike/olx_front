@@ -24,6 +24,12 @@
             <app-my-listings></app-my-listings>
           </ng-template>
         </li>
+        <li [ngbNavItem]="4">
+          <a ngbNavLink> <app-icon>list</app-icon> Meus Interesses</a>
+          <ng-template ngbNavContent>
+            <app-my-interests></app-my-interests>
+          </ng-template>
+        </li>
       </ul>
     </div>
 
